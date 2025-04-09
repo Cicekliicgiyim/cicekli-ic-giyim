@@ -2,7 +2,8 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Ürünler - Çiçekli İç Giyim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürünler | Çiçekli İç Giyim</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,17 +17,36 @@
     </nav>
   </header>
 
-  <main style="padding: 40px;">
-    <h2>Ürünler</h2>
-    <div id="product-list">
-      <!-- Ürünler buraya JavaScript ile gelecek -->
-    </div>
+  <main>
+    <section class="products">
+      <div class="container">
+        <h2 class="section-title">Ürünler</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="images/atlet.jpg" alt="Atlet">
+            <h3>Şık Atlet</h3>
+            <p class="price">₺89.90</p>
+            <button class="btn">Sepete Ekle</button>
+          </div>
+          <div class="product-card">
+            <img src="images/sutyen.jpg" alt="Sütyen">
+            <h3>Konforlu Sütyen</h3>
+            <p class="price">₺109.90</p>
+            <button class="btn">Sepete Ekle</button>
+          </div>
+          <div class="product-card">
+            <img src="images/pijama.jpg" alt="Pijama">
+            <h3>Rahat Pijama</h3>
+            <p class="price">₺139.90</p>
+            <button class="btn">Sepete Ekle</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
-
-  <script src="js/products.js"></script>
 </body>
 </html>
