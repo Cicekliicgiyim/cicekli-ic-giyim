@@ -2,39 +2,75 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Kayıt Ol - Çiçekli İç Giyim</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Kayıt Ol | Çiçekli İç Giyim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8fc;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 20px;
+      background-color: #fff0f5;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      text-align: center;
+      color: #e91e63;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Çiçekli İç Giyim</h1>
-    <nav>
-      <a href="index.html">Anasayfa</a>
-      <a href="login.html">Giriş Yap</a>
-    </nav>
-  </header>
-
-  <main style="padding: 40px;">
+  <div class="form-container">
     <h2>Kayıt Ol</h2>
     <form id="registerForm">
-      <label for="username">Kullanıcı Adı:</label><br>
-      <input type="text" id="username" required><br><br>
-
-      <label for="email">E-posta:</label><br>
-      <input type="email" id="email" required><br><br>
-
-      <label for="password">Şifre:</label><br>
-      <input type="password" id="password" required><br><br>
-
-      <label for="role">Rol:</label><br>
+      <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+      <input type="email" id="email" placeholder="E-posta" required>
+      <input type="password" id="password" placeholder="Şifre" required>
       <select id="role">
         <option value="user">Kullanıcı</option>
         <option value="admin">Admin</option>
-      </select><br><br>
-
+      </select>
       <button type="submit">Kayıt Ol</button>
     </form>
-  </main>
+    <p>Zaten bir hesabınız var mı? <a href="login.html">Giriş Yap</a></p>
+  </div>
 
   <script>
     document.getElementById("registerForm").addEventListener("submit", function (e) {
@@ -47,7 +83,6 @@
 
       const users = JSON.parse(localStorage.getItem("users")) || [];
 
-      // Aynı e-posta ile kayıtlı kullanıcı var mı kontrol et
       const existingUser = users.find(user => user.email === email);
       if (existingUser) {
         alert("Bu e-posta zaten kayıtlı.");
@@ -55,7 +90,7 @@
       }
 
       const newUser = {
-        username,
+        name: username,
         email,
         password,
         role
@@ -63,9 +98,8 @@
 
       users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
-      alert("Kayıt başarıyla oluşturuldu!");
-      document.getElementById("registerForm").reset();  // Formu sıfırlama
-      window.location.href = "login.html";  // Kullanıcıyı giriş sayfasına yönlendirme
+      alert("Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz.");
+      window.location.href = "login.html";
     });
   </script>
 </body>

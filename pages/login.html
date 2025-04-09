@@ -2,37 +2,73 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Giriş Yap - Çiçekli İç Giyim</title>
+  <title>Giriş Yap | Çiçekli İç Giyim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8fc;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 20px;
+      background-color: #fff0f5;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      text-align: center;
+      color: #e91e63;
+    }
+
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    #error-message {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Çiçekli İç Giyim</h1>
-    <nav>
-      <a href="index.html">Anasayfa</a>
-      <a href="register.html">Kayıt Ol</a>
-      <span id="user-info" style="margin-left: 10px;"></span>
-      <button id="logoutBtn" style="display: none; margin-left: 10px;">Çıkış Yap</button>
-    </nav>
-  </header>
-
-  <main style="padding: 40px;">
+  <div class="form-container">
     <h2>Giriş Yap</h2>
     <form id="loginForm">
-      <label for="email">E-posta:</label><br>
-      <input type="email" id="email" required><br><br>
-
-      <label for="password">Şifre:</label><br>
-      <input type="password" id="password" required><br><br>
-
+      <input type="email" id="email" placeholder="E-posta" required>
+      <input type="password" id="password" placeholder="Şifre" required>
       <button type="submit">Giriş Yap</button>
-      <p id="error-message" style="color: red; display: none;">Geçersiz e-posta veya şifre!</p>
+      <p id="error-message">E-posta veya şifre yanlış.</p>
     </form>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Çiçekli İç Giyim</p>
-  </footer>
+    <p>Hesabınız yok mu? <a href="register.html">Üye Ol</a></p>
+  </div>
 
   <script>
     document.getElementById("loginForm").addEventListener("submit", function (e) {
@@ -40,40 +76,21 @@
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+      const errorMessage = document.getElementById("error-message");
 
       const users = JSON.parse(localStorage.getItem("users")) || [];
       const user = users.find(u => u.email === email && u.password === password);
 
-      const errorMessage = document.getElementById("error-message");
-
       if (user) {
         localStorage.setItem("loggedInUser", JSON.stringify(user));
         alert("Giriş başarılı!");
-
         if (user.role === "admin") {
-          window.location.href = "admin.html";  // Admin paneline yönlendir
+          window.location.href = "admin.html";
         } else {
-          window.location.href = "index.html";  // Ana sayfaya yönlendir
+          window.location.href = "index.html";
         }
       } else {
-        errorMessage.style.display = "block";  // Hata mesajını göster
-      }
-    });
-
-    // Oturum kontrolü ve kullanıcı adı gösterme
-    window.addEventListener("DOMContentLoaded", () => {
-      const user = JSON.parse(localStorage.getItem("loggedInUser"));
-      const userInfo = document.getElementById("user-info");
-      const logoutBtn = document.getElementById("logoutBtn");
-
-      if (user) {
-        userInfo.textContent = `${user.name} olarak giriş yapıldı`;
-        logoutBtn.style.display = "inline-block";
-
-        logoutBtn.addEventListener("click", () => {
-          localStorage.removeItem("loggedInUser");
-          window.location.reload();
-        });
+        errorMessage.style.display = "block";
       }
     });
   </script>
