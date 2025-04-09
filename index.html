@@ -2,33 +2,38 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <title>Anasayfa | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Çiçekli İç Giyim</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/session.js" defer></script>
 </head>
-<body>
-  <header class="main-header">
-    <div class="container">
+<body data-require-login>
+  <header>
+    <div class="logo">
       <h1>Çiçekli İç Giyim</h1>
-      <nav>
-        <a href="index.html">Anasayfa</a>
-        <a href="products.html">Ürünler</a>
-        <a href="cart.html">Sepetim</a>
-        <a href="history.html">Siparişlerim</a>
-      </nav>
     </div>
+    <nav>
+      <a href="index.html">Anasayfa</a>
+      <a href="products.html">Ürünler</a>
+      <a href="cart.html">Sepetim</a>
+      <a href="history.html">Sipariş Geçmişi</a>
+      <span id="user-info" style="margin-left: 15px; font-weight: bold;"></span>
+      <button id="logoutBtn" style="display: none; margin-left: 10px;">Çıkış Yap</button>
+    </nav>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h2>Şıklığın ve Konforun Adresi</h2>
-      <p>En zarif iç giyim ürünleriyle kendinizi özel hissedin.</p>
-      <a href="products.html" class="btn">Alışverişe Başla</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>Şıklığın ve rahatlığın adresi</h2>
+        <p>Tarzınıza özel iç giyim koleksiyonlarını keşfedin.</p>
+        <a href="products.html" class="btn">Alışverişe Başla</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Çiçekli İç Giyim. Tüm hakları saklıdır.</p>
+    <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
 </body>
 </html>

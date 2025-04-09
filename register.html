@@ -2,43 +2,68 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Kayıt Ol</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Kayıt Ol - Çiçekli İç Giyim</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Kayıt Ol</h1>
+    <h1>Çiçekli İç Giyim</h1>
+    <nav>
+      <a href="index.html">Anasayfa</a>
+      <a href="login.html">Giriş Yap</a>
+    </nav>
   </header>
 
-  <main style="max-width: 400px; margin: auto;">
-    <form id="register-form">
-      <input type="text" id="username" placeholder="Kullanıcı Adı" required><br><br>
-      <input type="password" id="password" placeholder="Şifre" required><br><br>
+  <main style="padding: 40px;">
+    <h2>Kayıt Ol</h2>
+    <form id="registerForm">
+      <label for="username">Kullanıcı Adı:</label><br>
+      <input type="text" id="username" required><br><br>
+
+      <label for="email">E-posta:</label><br>
+      <input type="email" id="email" required><br><br>
+
+      <label for="password">Şifre:</label><br>
+      <input type="password" id="password" required><br><br>
+
+      <label for="role">Rol:</label><br>
       <select id="role">
         <option value="user">Kullanıcı</option>
         <option value="admin">Admin</option>
       </select><br><br>
+
       <button type="submit">Kayıt Ol</button>
     </form>
   </main>
 
   <script>
-    document.getElementById("register-form").addEventListener("submit", function(e) {
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      const username = document.getElementById("username").value;
+
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const role = document.getElementById("role").value;
 
       const users = JSON.parse(localStorage.getItem("users")) || [];
 
-      if (users.find(u => u.username === username)) {
-        alert("Bu kullanıcı adı zaten alınmış.");
+      // Aynı e-posta ile kayıtlı kullanıcı var mı kontrol et
+      const existingUser = users.find(user => user.email === email);
+      if (existingUser) {
+        alert("Bu e-posta zaten kayıtlı.");
         return;
       }
 
-      users.push({ username, password, role });
+      const newUser = {
+        username,
+        email,
+        password,
+        role
+      };
+
+      users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
-      alert("Kayıt başarılı! Giriş yapabilirsiniz.");
+      alert("Kayıt başarıyla oluşturuldu!");
       window.location.href = "login.html";
     });
   </script>
