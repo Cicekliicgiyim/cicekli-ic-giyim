@@ -5,6 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ürünler | Çiçekli İç Giyim</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      background: #e91e63;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background: #c2185b;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,25 +68,8 @@
     <section class="products">
       <div class="container">
         <h2 class="section-title">Ürünler</h2>
-        <div class="product-grid">
-          <div class="product-card">
-            <img src="images/atlet.jpg" alt="Atlet">
-            <h3>Şık Atlet</h3>
-            <p class="price">₺89.90</p>
-            <button class="btn">Sepete Ekle</button>
-          </div>
-          <div class="product-card">
-            <img src="images/sutyen.jpg" alt="Sütyen">
-            <h3>Konforlu Sütyen</h3>
-            <p class="price">₺109.90</p>
-            <button class="btn">Sepete Ekle</button>
-          </div>
-          <div class="product-card">
-            <img src="images/pijama.jpg" alt="Pijama">
-            <h3>Rahat Pijama</h3>
-            <p class="price">₺139.90</p>
-            <button class="btn">Sepete Ekle</button>
-          </div>
+        <div class="product-grid" id="product-list">
+          <!-- JavaScript ile ürünler buraya gelecek -->
         </div>
       </div>
     </section>
@@ -48,5 +78,43 @@
   <footer>
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const productList = document.getElementById("product-list");
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+
+      if (products.length === 0) {
+        productList.innerHTML = "<p>Henüz ürün eklenmedi.</p>";
+        return;
+      }
+
+      products.forEach((product, index) => {
+        const div = document.createElement("div");
+        div.className = "product-card";
+
+        div.innerHTML = `
+          <img src="images/${product.image}" alt="${product.title}">
+          <h3>${product.title}</h3>
+          <p class="price"><strong>₺${product.price}</strong></p>
+          <p>Kategori: ${product.category}</p>
+          <button class="btn" onclick='addToCart(${index})'>Sepete Ekle</button>
+        `;
+
+        productList.appendChild(div);
+      });
+    });
+
+    function addToCart(index) {
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+      const product = products[index];
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      alert(`${product.title} sepete eklendi.`);
+    }
+  </script>
 </body>
 </html>

@@ -15,12 +15,57 @@
 
   <main style="padding: 40px;">
     <h2>Yeni Ürün Ekle</h2>
-    <!-- Ürün ekleme formu burada olacak -->
-    <!-- Yönetim paneli içeriği -->
+    <form id="add-product-form">
+      <label>Ürün Adı:</label><br>
+      <input type="text" id="product-title"><br><br>
+
+      <label>Fiyat:</label><br>
+      <input type="number" id="product-price"><br><br>
+
+      <label>Görsel (örneğin: atlet.jpg):</label><br>
+      <input type="text" id="product-image"><br><br>
+
+      <label>Kategori:</label><br>
+      <input type="text" id="product-category"><br><br>
+
+      <button type="button" id="add-product-btn">Yeni Ürün Ekle</button>
+    </form>
   </main>
 
   <footer>
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
+
+  <!-- JavaScript bağlantısı -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("add-product-btn").addEventListener("click", () => {
+        const title = document.getElementById("product-title").value;
+        const price = document.getElementById("product-price").value;
+        const image = document.getElementById("product-image").value;
+        const category = document.getElementById("product-category").value;
+
+        if (!title || !price || !image || !category) {
+          alert("Lütfen tüm alanları doldurun.");
+          return;
+        }
+
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+
+        products.push({
+          title,
+          price,
+          image,
+          category
+        });
+
+        localStorage.setItem("products", JSON.stringify(products));
+        alert("Ürün başarıyla eklendi!");
+
+        // Formu temizle
+        document.getElementById("add-product-form").reset();
+      });
+    });
+  </script>
 </body>
 </html>
