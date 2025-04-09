@@ -13,7 +13,7 @@ body {
 
 /* Header */
 header {
-  background-color: #fff;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,7 +24,7 @@ header {
   z-index: 10;
 }
 
-.logo h1 {
+.logo h1, header h1 {
   margin: 0;
   font-size: 26px;
   color: #b71c5a;
@@ -74,7 +74,7 @@ nav button:hover {
 .hero {
   text-align: center;
   padding: 100px 20px;
-  background: linear-gradient(to right, #fce4ec, #f8bbd0);
+  background: linear-gradient(to right, #ececec, #e0e0e0);
 }
 
 .hero h2 {
@@ -89,7 +89,7 @@ nav button:hover {
 }
 
 /* Genel Buton */
-.btn {
+.btn, button {
   background-color: #b71c5a;
   color: white;
   padding: 12px 24px;
@@ -99,9 +99,11 @@ nav button:hover {
   font-size: 16px;
   transition: 0.3s;
   border: none;
+  cursor: pointer;
+  display: inline-block;
 }
 
-.btn:hover {
+.btn:hover, button:hover {
   background-color: #8e1247;
 }
 
@@ -179,6 +181,21 @@ footer {
 
 .product-card .btn:hover {
   background-color: #8e1247;
+}
+
+/* Checkout & Form */
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+select {
+  background-color: #fff;
+  color: #333;
 }
 
 /* Mobil uyum */
