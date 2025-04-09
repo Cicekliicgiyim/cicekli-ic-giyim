@@ -16,7 +16,7 @@
     }
 
     body {
-      background-color: #fff;
+      background-color: #f4f4f4;
       color: #333;
     }
 
@@ -26,16 +26,17 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 30px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ddd;
       position: sticky;
       top: 0;
       z-index: 10;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
 
     .logo h1 {
       margin: 0;
       font-size: 26px;
-      color: #e91e63;
+      color: #c2185b;
       font-weight: 600;
     }
 
@@ -48,28 +49,28 @@
 
     nav a {
       text-decoration: none;
-      color: #444;
+      color: #555;
       font-weight: 500;
       transition: 0.3s;
     }
 
     nav a:hover {
-      color: #e91e63;
+      color: #c2185b;
     }
 
     #greeting {
       font-weight: bold;
-      color: #e91e63;
+      color: #c2185b;
     }
 
     #logoutBtn,
     #loginBtn,
     #registerBtn {
-      background-color: #e91e63;
+      background-color: #c2185b;
       color: white;
       border: none;
       padding: 6px 12px;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 14px;
       transition: 0.3s;
@@ -78,28 +79,30 @@
     #logoutBtn:hover,
     #loginBtn:hover,
     #registerBtn:hover {
-      background-color: #d2185b;
+      background-color: #a3154b;
     }
 
     .hero {
       text-align: center;
       padding: 100px 20px;
-      background: linear-gradient(to right, #ffe4ec, #fff0f5);
+      background: linear-gradient(to right, #e8e8e8, #f6f6f6);
+      border-bottom: 1px solid #ddd;
     }
 
     .hero h2 {
       font-size: 36px;
       margin-bottom: 15px;
-      color: #e91e63;
+      color: #c2185b;
     }
 
     .hero p {
       font-size: 20px;
       margin-bottom: 25px;
+      color: #555;
     }
 
     .btn {
-      background-color: #e91e63;
+      background-color: #c2185b;
       color: white;
       padding: 12px 24px;
       border-radius: 6px;
@@ -110,15 +113,16 @@
     }
 
     .btn:hover {
-      background-color: #d2185b;
+      background-color: #a3154b;
     }
 
     footer {
       text-align: center;
       padding: 20px;
-      background-color: #fafafa;
+      background-color: #e0e0e0;
       font-size: 14px;
-      border-top: 1px solid #eee;
+      color: #666;
+      border-top: 1px solid #ccc;
     }
 
     @media screen and (max-width: 600px) {

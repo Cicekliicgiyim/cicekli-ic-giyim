@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #fff;
+  background-color: #f4f4f4;
   color: #333;
 }
 
@@ -18,7 +18,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -27,7 +27,7 @@ header {
 .logo h1 {
   margin: 0;
   font-size: 26px;
-  color: #e91e63;
+  color: #b71c5a;
   font-weight: 600;
 }
 
@@ -52,35 +52,35 @@ nav a, nav button {
 }
 
 nav a:hover {
-  color: #e91e63;
+  color: #b71c5a;
 }
 
 nav button {
-  background-color: #e91e63;
+  background-color: #b71c5a;
   color: white;
   cursor: pointer;
 }
 
 nav button:hover {
-  background-color: #c2185b;
+  background-color: #8e1247;
 }
 
 #greeting {
   font-weight: bold;
-  color: #e91e63;
+  color: #b71c5a;
 }
 
 /* Hero Alanı */
 .hero {
   text-align: center;
   padding: 100px 20px;
-  background: linear-gradient(to right, #ffe4ec, #fff0f5);
+  background: linear-gradient(to right, #fce4ec, #f8bbd0);
 }
 
 .hero h2 {
   font-size: 36px;
   margin-bottom: 15px;
-  color: #e91e63;
+  color: #b71c5a;
 }
 
 .hero p {
@@ -90,7 +90,7 @@ nav button:hover {
 
 /* Genel Buton */
 .btn {
-  background-color: #e91e63;
+  background-color: #b71c5a;
   color: white;
   padding: 12px 24px;
   border-radius: 6px;
@@ -102,28 +102,28 @@ nav button:hover {
 }
 
 .btn:hover {
-  background-color: #d2185b;
+  background-color: #8e1247;
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 20px;
-  background-color: #fafafa;
+  background-color: #e0e0e0;
   font-size: 14px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #ccc;
 }
 
 /* Ürünler */
 .products {
   padding: 60px 20px;
-  background: #fefefe;
+  background: #f9f9f9;
 }
 
 .section-title {
   text-align: center;
   font-size: 2rem;
-  color: #e91e63;
+  color: #b71c5a;
   margin-bottom: 40px;
 }
 
@@ -161,13 +161,13 @@ footer {
 }
 
 .product-card .price {
-  color: #e91e63;
+  color: #b71c5a;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
 .product-card .btn {
-  background-color: #e91e63;
+  background-color: #b71c5a;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -178,7 +178,7 @@ footer {
 }
 
 .product-card .btn:hover {
-  background-color: #c2185b;
+  background-color: #8e1247;
 }
 
 /* Mobil uyum */

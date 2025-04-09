@@ -11,17 +11,17 @@
       font-family: 'Montserrat', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #fff;
+      background-color: #f1f1f1;
       color: #333;
     }
 
     header {
-      background-color: #fff;
+      background-color: #ffffff;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 15px 30px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ddd;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -37,11 +37,12 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     nav a {
       text-decoration: none;
-      color: #444;
+      color: #555;
       font-weight: 500;
       transition: 0.3s;
     }
@@ -62,7 +63,7 @@
       color: white;
       border: none;
       padding: 6px 12px;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 14px;
       transition: 0.3s;
@@ -71,7 +72,7 @@
     #logoutBtn:hover,
     #loginBtn:hover,
     #registerBtn:hover {
-      background-color: #d2185b;
+      background-color: #c2185b;
     }
 
     main {
@@ -80,16 +81,21 @@
       padding: 40px 20px;
     }
 
+    h2 {
+      color: #444;
+      margin-bottom: 25px;
+    }
+
     .cart-item {
       display: flex;
       gap: 15px;
       align-items: center;
       padding: 15px;
       margin-bottom: 15px;
-      border: 1px solid #ddd;
       border-radius: 12px;
-      background-color: #fff;
+      background-color: #ffffff;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border-left: 5px solid #e91e63;
     }
 
     .cart-item img {
@@ -119,6 +125,7 @@
       font-size: 1.2em;
       margin-top: 20px;
       font-weight: bold;
+      color: #333;
     }
 
     .btn {
@@ -135,14 +142,14 @@
     }
 
     .btn:hover {
-      background-color: #d2185b;
+      background-color: #c2185b;
     }
 
     .empty-cart {
       text-align: center;
       font-size: 1.1em;
       padding: 20px;
-      color: #999;
+      color: #888;
     }
 
     footer {
@@ -150,8 +157,9 @@
       padding: 20px;
       background-color: #fafafa;
       font-size: 14px;
-      border-top: 1px solid #eee;
+      border-top: 1px solid #ddd;
       margin-top: 50px;
+      color: #777;
     }
 
     @media screen and (max-width: 600px) {
