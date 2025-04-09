@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sipariş Geçmişi - Çiçekli İç Giyim</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: Arial;
+      background: #fff0f5;
+    }
+
+    header {
+      background: #e91e63;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .order {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+
+    .order:last-child {
+      border-bottom: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #eee;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Çiçekli İç Giyim</h1>
+    <nav>
+      <a href="index.html">Anasayfa</a>
+      <a href="products.html">Ürünler</a>
+      <a href="cart.html">Sepetim</a>
+      <a href="history.html">Sipariş Geçmişi</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Sipariş Geçmişiniz</h2>
+    <div id="order-history">
+      <!-- Sipariş geçmişi buraya yüklenecek -->
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Çiçekli İç Giyim</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      const allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+      const orderContainer = document.getElementById("order-history");
+
+      if (!currentUser) {
+        orderContainer.innerHTML = "<p>Lütfen önce giriş yapınız.</p>";
+        return;
+      }
+
+      const userOrders = allOrders.filter(order => order.email === currentUser.email);
+
+      if (userOrders.length === 0) {
+        orderContainer.innerHTML = "<p>Henüz siparişiniz bulunmamaktadır.</p>";
+        return;
+      }
+
+      userOrders.forEach((order, index) => {
+        const div = document.createElement("div");
+        div.className = "order";
+
+        let itemsHTML = order.items.map(item => `
+          <li>${item.title} - ₺${item.price}</li>
+        `).join("");
+
+        div.innerHTML = `
+          <h3>Sipariş ${index + 1}</h3>
+          <ul>${itemsHTML}</ul>
+          <p><strong>Tarih:</strong> ${order.date}</p>
+          <p><strong>Toplam:</strong> ₺${order.total}</p>
+        `;
+
+        orderContainer.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>
