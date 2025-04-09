@@ -6,6 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/session.js" defer></script>
+  <style>
+    #greeting {
+      float: right;
+      margin-top: 10px;
+      margin-right: 15px;
+      font-weight: bold;
+      color: #e91e63;
+    }
+    header::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  </style>
 </head>
 <body data-require-login>
   <header>
@@ -20,6 +34,7 @@
       <span id="user-info" style="margin-left: 15px; font-weight: bold;"></span>
       <button id="logoutBtn" style="display: none; margin-left: 10px;">Çıkış Yap</button>
     </nav>
+    <div id="greeting"></div>
   </header>
 
   <main>
@@ -35,5 +50,12 @@
   <footer>
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
+
+  <script>
+    const sessionUser = JSON.parse(localStorage.getItem("sessionUser"));
+    if (sessionUser) {
+      document.getElementById("greeting").innerText = `Hoş geldin, ${sessionUser.name}!`;
+    }
+  </script>
 </body>
 </html>
