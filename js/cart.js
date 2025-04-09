@@ -4,25 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   if (cart.length === 0) {
-    cartItemsContainer.innerHTML = "<p>Sepetinizde ürün bulunmamaktadır.</p>";
-    cartSummaryContainer.innerHTML = "<p>Toplam: ₺0.00</p>";
+    cartItemsContainer.innerHTML = `<div class="empty-cart">Sepetinizde ürün bulunmamaktadır.</div>`;
+    cartSummaryContainer.innerHTML = `<div class="total-box">Toplam: ₺0.00</div>`;
     return;
   }
 
   let total = 0;
+  cartItemsContainer.innerHTML = "";
 
-  // Sepetteki her ürünü ekleyelim
-  cartItemsContainer.innerHTML = '';  // Önceden eklenen öğeleri temizleyelim
   cart.forEach((item, index) => {
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("cart-item");
 
     itemDiv.innerHTML = `
-      <div class="cart-item-details">
-        <img src="images/${item.image}" alt="${item.title}" style="width: 100px;">
+      <img src="images/${item.image}" alt="${item.title}" class="cart-item-img">
+      <div class="cart-item-info">
         <h4>${item.title}</h4>
-        <p>₺${item.price}</p>
-        <button onclick="removeFromCart(${index})">Kaldır</button>
+        <p class="cart-price">₺${item.price}</p>
+        <button class="remove-btn" onclick="removeFromCart(${index})">Kaldır</button>
       </div>
     `;
 
@@ -30,46 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     total += parseFloat(item.price);
   });
 
-  // Sepet toplamını ekleyelim
-  cartSummaryContainer.innerHTML = `<p>Toplam: ₺${total.toFixed(2)}</p>`;
+  cartSummaryContainer.innerHTML = `
+    <div class="total-box">Toplam: ₺${total.toFixed(2)}</div>
+  `;
 });
 
-// Sepetten ürün kaldırma fonksiyonu
 function removeFromCart(index) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1); // Ürünü sepetten kaldır
+  cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-
-  // Sayfayı yeniden yüklememek için sadece ürünleri güncelle
-  const cartItemsContainer = document.getElementById("cart-items");
-  const cartSummaryContainer = document.getElementById("cart-summary");
-
-  // Ürünleri yeniden ekle
-  cartItemsContainer.innerHTML = '';  
-  let total = 0;
-
-  if (cart.length === 0) {
-    cartItemsContainer.innerHTML = "<p>Sepetinizde ürün bulunmamaktadır.</p>";
-    cartSummaryContainer.innerHTML = "<p>Toplam: ₺0.00</p>";
-    return;
-  }
-
-  cart.forEach((item, index) => {
-    const itemDiv = document.createElement("div");
-    itemDiv.classList.add("cart-item");
-
-    itemDiv.innerHTML = `
-      <div class="cart-item-details">
-        <img src="images/${item.image}" alt="${item.title}" style="width: 100px;">
-        <h4>${item.title}</h4>
-        <p>₺${item.price}</p>
-        <button onclick="removeFromCart(${index})">Kaldır</button>
-      </div>
-    `;
-
-    cartItemsContainer.appendChild(itemDiv);
-    total += parseFloat(item.price);
-  });
-
-  cartSummaryContainer.innerHTML = `<p>Toplam: ₺${total.toFixed(2)}</p>`;
+  location.reload(); // Sayfayı yenileyerek listeyi güncelle
 }
