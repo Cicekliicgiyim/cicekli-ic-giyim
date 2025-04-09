@@ -1,3 +1,91 @@
+/* Genel Buton Stili */
+.btn {
+  background-color: #e91e63;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #c2185b;
+}
+
+/* Header */
+header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #e91e63;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+#greeting {
+  margin-left: 15px;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+#logoutBtn,
+#loginBtn,
+#registerBtn {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Hero Section (Anasayfa) */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #fff0f5;
+}
+
+.hero h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #fafafa;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+/* Ürünler Sayfası */
 .products {
   padding: 60px 20px;
   background: #fefefe;
