@@ -40,13 +40,16 @@
       color: #e91e63;
     }
 
-    #logoutBtn {
+    #logoutBtn,
+    #loginBtn,
+    #registerBtn {
       background-color: #e91e63;
       color: white;
       border: none;
-      padding: 5px 10px;
+      padding: 6px 12px;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 14px;
     }
 
     .hero {
@@ -94,6 +97,8 @@
       <a href="cart.html">Sepetim</a>
       <a href="history.html">Sipariş Geçmişi</a>
       <span id="greeting"></span>
+      <button id="loginBtn">Giriş Yap</button>
+      <button id="registerBtn">Üye Ol</button>
       <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
     </nav>
   </header>
@@ -114,10 +119,31 @@
 
   <script>
     const sessionUser = JSON.parse(localStorage.getItem("sessionUser"));
+
     if (sessionUser) {
       document.getElementById("greeting").innerText = `Hoş geldin, ${sessionUser.name}`;
       document.getElementById("logoutBtn").style.display = "inline-block";
+      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("registerBtn").style.display = "none";
+    } else {
+      document.getElementById("greeting").innerText = "";
+      document.getElementById("logoutBtn").style.display = "none";
+      document.getElementById("loginBtn").style.display = "inline-block";
+      document.getElementById("registerBtn").style.display = "inline-block";
     }
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+
+    document.getElementById("registerBtn").addEventListener("click", () => {
+      window.location.href = "register.html";
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("sessionUser");
+      location.reload();
+    });
   </script>
 </body>
 </html>
