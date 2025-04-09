@@ -1,27 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
     const userInfo = document.getElementById("user-info");
     const logoutBtn = document.getElementById("logoutBtn");
-    const user = JSON.parse(localStorage.getItem("loggedInUser"));
   
-    if (userInfo && logoutBtn) {
-      if (user) {
-        userInfo.textContent = `${user.name} olarak giriş yapıldı`;
-        logoutBtn.style.display = "inline-block";
+    // Kullanıcı oturum bilgisini kontrol et
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   
-        logoutBtn.addEventListener("click", () => {
-          localStorage.removeItem("loggedInUser");
-          window.location.href = "login.html";
-        });
-      } else {
-        userInfo.textContent = "";
-        logoutBtn.style.display = "none";
-      }
+    if (currentUser) {
+      userInfo.textContent = `${currentUser.name} (Giriş Yapıldı)`;
+      logoutBtn.style.display = "inline-block"; // Çıkış butonunu göster
+    } else {
+      userInfo.textContent = "Giriş Yapın";
+      logoutBtn.style.display = "none"; // Çıkış butonunu gizle
     }
   
-    // Oturum açmadan erişilmemesi gereken sayfalarda kontrol
-    if (document.body.hasAttribute("data-require-login") && !user) {
-      alert("Bu sayfayı görüntülemek için giriş yapmanız gerekiyor.");
-      window.location.href = "login.html";
-    }
+    // Çıkış yap butonuna tıklanıldığında
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("currentUser"); // Oturumu sil
+      window.location.reload(); // Sayfayı yenile
+    });
   });
   

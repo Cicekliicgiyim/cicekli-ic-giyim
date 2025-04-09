@@ -26,6 +26,7 @@
       <input type="password" id="password" required><br><br>
 
       <button type="submit">Giriş Yap</button>
+      <p id="error-message" style="color: red; display: none;">Geçersiz e-posta veya şifre!</p>
     </form>
   </main>
 
@@ -43,17 +44,19 @@
       const users = JSON.parse(localStorage.getItem("users")) || [];
       const user = users.find(u => u.email === email && u.password === password);
 
+      const errorMessage = document.getElementById("error-message");
+
       if (user) {
         localStorage.setItem("loggedInUser", JSON.stringify(user));
         alert("Giriş başarılı!");
 
         if (user.role === "admin") {
-          window.location.href = "admin.html";
+          window.location.href = "admin.html";  // Admin paneline yönlendir
         } else {
-          window.location.href = "index.html";
+          window.location.href = "index.html";  // Ana sayfaya yönlendir
         }
       } else {
-        alert("Geçersiz e-posta veya şifre!");
+        errorMessage.style.display = "block";  // Hata mesajını göster
       }
     });
 

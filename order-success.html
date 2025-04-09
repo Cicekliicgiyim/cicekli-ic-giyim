@@ -4,6 +4,22 @@
   <meta charset="UTF-8">
   <title>Sipariş Başarılı - Çiçekli İç Giyim</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #e91e63;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #c2185b;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -18,11 +34,18 @@
   <main style="padding: 40px; text-align: center;">
     <h2>Siparişiniz Başarıyla Alındı!</h2>
     <p>Çiçekli İç Giyim’i tercih ettiğiniz için teşekkür ederiz.</p>
-    <a href="index.html">Anasayfaya Dön</a>
+    <a href="index.html" class="btn">Anasayfaya Dön</a>
   </main>
 
   <footer>
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
+
+  <script>
+    // 5 saniye sonra otomatik yönlendirme
+    setTimeout(function() {
+      window.location.href = "index.html";
+    }, 5000);
+  </script>
 </body>
 </html>
