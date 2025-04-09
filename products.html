@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ürünler | Çiçekli İç Giyim</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
   <style>
     .container {
       max-width: 1000px;
       margin: auto;
       padding: 20px;
     }
-
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 20px;
     }
-
     .product-card {
       background: #fff;
       border: 1px solid #ddd;
@@ -27,17 +25,14 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       transition: transform 0.2s ease;
     }
-
     .product-card:hover {
       transform: scale(1.02);
     }
-
     .product-card img {
       max-width: 100%;
       height: auto;
       margin-bottom: 10px;
     }
-
     .btn {
       background: #e91e63;
       color: white;
@@ -47,15 +42,37 @@
       cursor: pointer;
       border-radius: 5px;
     }
-
     .btn:hover {
       background: #c2185b;
     }
+    #user-info {
+      float: right;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    #logoutBtn {
+      float: right;
+      margin-left: 10px;
+      margin-top: 6px;
+      padding: 5px 10px;
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    header::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
   </style>
 </head>
-<body>
+<body data-require-login>
   <header>
     <h1>Çiçekli İç Giyim</h1>
+    <div id="user-info"></div>
+    <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
     <nav>
       <a href="index.html">Anasayfa</a>
       <a href="products.html">Ürünler</a>
@@ -69,7 +86,7 @@
       <div class="container">
         <h2 class="section-title">Ürünler</h2>
         <div class="product-grid" id="product-list">
-          <!-- JavaScript ile ürünler buraya gelecek -->
+          <!-- JavaScript ile ürünler buraya yüklenecek -->
         </div>
       </div>
     </section>
@@ -79,6 +96,7 @@
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
 
+  <!-- Ürünleri yükleme ve sepete ekleme -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const productList = document.getElementById("product-list");
@@ -92,7 +110,6 @@
       products.forEach((product, index) => {
         const div = document.createElement("div");
         div.className = "product-card";
-
         div.innerHTML = `
           <img src="images/${product.image}" alt="${product.title}">
           <h3>${product.title}</h3>
@@ -100,7 +117,6 @@
           <p>Kategori: ${product.category}</p>
           <button class="btn" onclick='addToCart(${index})'>Sepete Ekle</button>
         `;
-
         productList.appendChild(div);
       });
     });
@@ -108,13 +124,14 @@
     function addToCart(index) {
       const products = JSON.parse(localStorage.getItem("products")) || [];
       const product = products[index];
-
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       cart.push(product);
       localStorage.setItem("cart", JSON.stringify(cart));
-
       alert(`${product.title} sepete eklendi.`);
     }
   </script>
+
+  <!-- Oturum kontrolü ve kullanıcı bilgisi -->
+  <script src="js/session.js" defer></script>
 </body>
 </html>
