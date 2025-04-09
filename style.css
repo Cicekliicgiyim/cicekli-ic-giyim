@@ -1,16 +1,14 @@
-/* Genel Buton Stili */
-.btn {
-  background-color: #e91e63;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+/* Sayfa Genel Stili */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.btn:hover {
-  background-color: #c2185b;
+body {
+  background-color: #fff;
+  color: #333;
 }
 
 /* Header */
@@ -21,71 +19,102 @@ header {
   align-items: center;
   padding: 15px 30px;
   border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .logo h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 26px;
   color: #e91e63;
+  font-weight: 600;
 }
 
+/* Navigasyon */
 nav {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-nav a {
-  text-decoration: none;
-  color: #333;
+nav a, nav button {
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
   font-weight: 500;
+  text-decoration: none;
+  color: #444;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #e91e63;
+}
+
+nav button {
+  background-color: #e91e63;
+  color: white;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: #c2185b;
 }
 
 #greeting {
-  margin-left: 15px;
   font-weight: bold;
   color: #e91e63;
 }
 
-#logoutBtn,
-#loginBtn,
-#registerBtn {
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-/* Hero Section (Anasayfa) */
+/* Hero Alanı */
 .hero {
   text-align: center;
   padding: 100px 20px;
-  background-color: #fff0f5;
+  background: linear-gradient(to right, #ffe4ec, #fff0f5);
 }
 
 .hero h2 {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #e91e63;
 }
 
 .hero p {
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+/* Genel Buton */
+.btn {
+  background-color: #e91e63;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #d2185b;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  padding: 15px;
+  padding: 20px;
   background-color: #fafafa;
   font-size: 14px;
-  margin-top: 30px;
+  border-top: 1px solid #eee;
 }
 
-/* Ürünler Sayfası */
+/* Ürünler */
 .products {
   padding: 60px 20px;
   background: #fefefe;
@@ -150,4 +179,24 @@ footer {
 
 .product-card .btn:hover {
   background-color: #c2185b;
+}
+
+/* Mobil uyum */
+@media screen and (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav a, nav button {
+    margin: 5px 0;
+  }
+
+  .hero h2 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
 }
