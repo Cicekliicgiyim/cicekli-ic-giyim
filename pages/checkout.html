@@ -1,124 +1,125 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Çiçekli İç Giyim | Ödeme</title>
-  <link rel="stylesheet" href="checkout.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fdfdfd;
-      margin: 0;
-      padding: 0;
-    }
+<!DOCTYPE html>  
+<html lang="tr">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <title>Çiçekli İç Giyim | Ödeme</title>  
+  <link rel="stylesheet" href="checkout.css">  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">  
+  <style>  
+    body {  
+      font-family: 'Inter', sans-serif;  
+      background-color: #fdfdfd;  
+      margin: 0;  
+      padding: 0;  
+    }  
 
-    .checkout-container {
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 40px;
-      background: #fff;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
-      border-radius: 10px;
-    }
+    .checkout-container {  
+      max-width: 600px;  
+      margin: 60px auto;  
+      padding: 40px;  
+      background: #fff;  
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);  
+      border-radius: 10px;  
+    }  
 
-    .checkout-title {
-      font-size: 24px;
-      color: #b71c5a;
-      margin-bottom: 30px;
-      border-bottom: 2px solid #f3c1d9;
-      padding-bottom: 10px;
-    }
+    .checkout-title {  
+      font-size: 24px;  
+      color: #d6006d; /* Değiştirildi */  
+      margin-bottom: 30px;  
+      border-bottom: 2px solid #f3c1d9;  
+      padding-bottom: 10px;  
+      text-align: center; /* Ortada hizalandı */  
+    }  
 
-    .checkout-form label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 500;
-      color: #333;
-    }
+    .checkout-form label {  
+      display: block;  
+      margin-bottom: 6px;  
+      font-weight: 500;  
+      color: #333;  
+    }  
 
-    .checkout-form input,
-    .checkout-form textarea,
-    .checkout-form select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      font-size: 15px;
-    }
+    .checkout-form input,  
+    .checkout-form textarea,  
+    .checkout-form select {  
+      width: 100%;  
+      padding: 12px;  
+      border: 1px solid #ddd;  
+      border-radius: 6px;  
+      margin-bottom: 20px;  
+      font-size: 15px;  
+    }  
 
-    .checkout-form textarea {
-      resize: vertical;
-    }
+    .checkout-form textarea {  
+      resize: vertical;  
+    }  
 
-    .row {
-      display: flex;
-      gap: 20px;
-    }
+    .row {  
+      display: flex;  
+      gap: 20px;  
+    }  
 
-    .row > div {
-      flex: 1;
-    }
+    .row > div {  
+      flex: 1;  
+    }  
 
-    .checkout-form button {
-      background-color: #b71c5a;
-      color: #fff;
-      padding: 14px;
-      border: none;
-      width: 100%;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+    .checkout-form button {  
+      background-color: #d6006d; /* Değiştirildi */  
+      color: #fff;  
+      padding: 14px;  
+      border: none;  
+      width: 100%;  
+      border-radius: 6px;  
+      font-size: 16px;  
+      font-weight: bold;  
+      cursor: pointer;  
+      transition: background-color 0.3s;  
+    }  
 
-    .checkout-form button:hover {
-      background-color: #8e1247;
-    }
-  </style>
-</head>
-<body>
+    .checkout-form button:hover {  
+      background-color: #b30056; /* Değiştirildi */  
+    }  
+  </style>  
+</head>  
+<body>  
 
-  <div class="checkout-container">
-    <h2 class="checkout-title">Ödeme Bilgileri</h2>
-    <form class="checkout-form" action="order-success.html" method="post">
-      <label>Ad Soyad</label>
-      <input type="text" name="fullname" placeholder="Ad Soyad" required>
+  <div class="checkout-container">  
+    <h2 class="checkout-title">Ödeme Bilgileri</h2>  
+    <form class="checkout-form" action="order-success.html" method="post">  
+      <label>Ad Soyad</label>  
+      <input type="text" name="fullname" placeholder="Ad Soyad" required>  
 
-      <label>E-posta</label>
-      <input type="email" name="email" placeholder="E-posta" required>
+      <label>E-posta</label>  
+      <input type="email" name="email" placeholder="E-posta" required>  
 
-      <label>Telefon</label>
-      <input type="tel" name="phone" placeholder="Telefon Numarası (05xx xxx xx xx)" required>
+      <label>Telefon</label>  
+      <input type="tel" name="phone" placeholder="Telefon Numarası (05xx xxx xx xx)" required>  
 
-      <div class="row">
-        <div>
-          <label>İl</label>
-          <input type="text" name="city" placeholder="İl" required>
-        </div>
-        <div>
-          <label>İlçe</label>
-          <input type="text" name="district" placeholder="İlçe" required>
-        </div>
-      </div>
+      <div class="row">  
+        <div>  
+          <label>İl</label>  
+          <input type="text" name="city" placeholder="İl" required>  
+        </div>  
+        <div>  
+          <label>İlçe</label>  
+          <input type="text" name="district" placeholder="İlçe" required>  
+        </div>  
+      </div>  
 
-      <label>Teslimat Adresi</label>
-      <textarea name="address" rows="3" placeholder="Teslimat Adresi" required></textarea>
+      <label>Teslimat Adresi</label>  
+      <textarea name="address" rows="3" placeholder="Teslimat Adresi" required></textarea>  
 
-      <label>Kargo Firması</label>
-      <select name="shipping" required>
-        <option value="">Kargo Firması Seçiniz</option>
-        <option value="Yurtiçi">Yurtiçi</option>
-        <option value="Aras">Aras</option>
-        <option value="MNG">MNG</option>
-      </select>
+      <label>Kargo Firması</label>  
+      <select name="shipping" required>  
+        <option value="">Kargo Firması Seçiniz</option>  
+        <option value="Yurtiçi">Yurtiçi</option>  
+        <option value="Aras">Aras</option>  
+        <option value="MNG">MNG</option>  
+      </select>  
 
-      <button type="submit">Siparişi Onayla</button>
-    </form>
-  </div>
+      <button type="submit">Siparişi Onayla</button>  
+    </form>  
+  </div>  
 
-</body>
+</body>  
 </html>
