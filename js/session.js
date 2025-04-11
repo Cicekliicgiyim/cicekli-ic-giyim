@@ -33,20 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // Giriş yap
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
-      window.location.href = "login.html";
+      window.location.href = "pages/login.html";  // Güncellendi
     });
   }
 
   // Kayıt ol
   if (registerBtn) {
     registerBtn.addEventListener("click", () => {
-      window.location.href = "register.html";
+      window.location.href = "pages/register.html";  // Güncellendi
     });
   }
 
   // Sayfa giriş gerektiriyorsa ve kullanıcı yoksa login'e yönlendir
   const requireLogin = document.body.getAttribute("data-require-login");
   if (requireLogin !== null && !currentUser) {
-    window.location.href = "login.html";
+    window.location.href = "pages/login.html";  // Güncellendi
   }
 });
