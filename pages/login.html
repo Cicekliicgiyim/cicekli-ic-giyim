@@ -73,5 +73,23 @@
   </div>
 
   <script src="js/login.js"></script>
+
+  <script>
+    // Giriş yapma fonksiyonu
+    document.getElementById('loginForm').onsubmit = function(event) {
+      event.preventDefault();  // Formun otomatik olarak gönderilmesini engelle
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Burada basit bir doğrulama var. Gerçek dünyada sunucu tarafında doğrulama yapılır.
+      if (email === "user@example.com" && password === "12345") {  // Bu kısmı güncellemek gerekebilir
+        sessionStorage.setItem('user', email);  // Oturum bilgisi kaydedildi
+        window.location.href = 'index.html';  // Giriş başarılı, anasayfaya yönlendir
+      } else {
+        document.getElementById('error-message').style.display = 'block';  // Hata mesajını göster
+      }
+    };
+  </script>
 </body>
 </html>
