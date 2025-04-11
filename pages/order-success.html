@@ -28,15 +28,21 @@
       margin: 0;
     }
 
-    nav a {
+    nav a, nav span, nav button {
       margin-left: 15px;
       text-decoration: none;
       color: #555;
       font-weight: 500;
       transition: color 0.3s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 16px;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav button:hover {
       color: #e91e63;
     }
 
@@ -103,13 +109,16 @@
     }
   </style>
 </head>
-<body>
+<body data-require-login>
   <header>
     <h1>Çiçekli İç Giyim</h1>
     <nav>
       <a href="index.html">Anasayfa</a>
       <a href="products.html">Ürünler</a>
       <a href="cart.html">Sepetim</a>
+      <a href="history.html">Sipariş Geçmişi</a>
+      <span id="greeting"></span>
+      <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
     </nav>
   </header>
 
@@ -124,5 +133,6 @@
   </footer>
 
   <script src="js/order-success.js"></script>
+  <script src="js/session.js" defer></script>
 </body>
 </html>

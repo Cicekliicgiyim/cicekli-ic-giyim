@@ -6,11 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/load-data.css">
 </head>
-<body>
-  <h1>Çiçekli İç Giyim - Yerel Veri Yükleme</h1>
-  <p>Siteye örnek ürünler ve admin hesabı eklemek için aşağıdaki butona tıklayın.</p>
-  <button onclick="loadData()">📦 Verileri Yükle</button>
+<body data-require-login>
+  <header>
+    <h1>Çiçekli İç Giyim</h1>
+    <nav>
+      <a href="index.html">Anasayfa</a>
+      <a href="products.html">Ürünler</a>
+      <a href="cart.html">Sepetim</a>
+      <span id="greeting"></span>
+      <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Yerel Veri Yükleme</h2>
+    <p>Siteye örnek ürünler ve admin hesabı eklemek için aşağıdaki butona tıklayın.</p>
+    <button onclick="loadData()">📦 Verileri Yükle</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Çiçekli İç Giyim</p>
+  </footer>
 
   <script src="js/load-data.js"></script>
+  <script src="js/session.js" defer></script>
 </body>
 </html>

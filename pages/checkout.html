@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Çiçekli İç Giyim | Ödeme</title>
-  <link rel="stylesheet" href="../css/checkout.css">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/checkout.css" />
+  <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/session.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -105,22 +105,22 @@
       <h2 class="checkout-title">Ödeme Bilgileri</h2>
       <form class="checkout-form" action="order-success.html" method="post">
         <label>Ad Soyad</label>
-        <input type="text" name="fullname" placeholder="Ad Soyad" required>
+        <input type="text" name="fullname" placeholder="Ad Soyad" required />
 
         <label>E-posta</label>
-        <input type="email" name="email" placeholder="E-posta" required>
+        <input type="email" name="email" placeholder="E-posta" required />
 
         <label>Telefon</label>
-        <input type="tel" name="phone" placeholder="Telefon Numarası (05xx xxx xx xx)" required>
+        <input type="tel" name="phone" placeholder="Telefon Numarası (05xx xxx xx xx)" required />
 
         <div class="row">
           <div>
             <label>İl</label>
-            <input type="text" name="city" placeholder="İl" required>
+            <input type="text" name="city" placeholder="İl" required />
           </div>
           <div>
             <label>İlçe</label>
-            <input type="text" name="district" placeholder="İlçe" required>
+            <input type="text" name="district" placeholder="İlçe" required />
           </div>
         </div>
 
@@ -143,34 +143,5 @@
   <footer>
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
-
-  <script>
-    const sessionUser = JSON.parse(localStorage.getItem("sessionUser"));
-
-    if (sessionUser) {
-      document.getElementById("greeting").innerText = `Hoş geldin, ${sessionUser.name}`;
-      document.getElementById("logoutBtn").style.display = "inline-block";
-      document.getElementById("loginBtn").style.display = "none";
-      document.getElementById("registerBtn").style.display = "none";
-    } else {
-      document.getElementById("greeting").innerText = "";
-      document.getElementById("logoutBtn").style.display = "none";
-      document.getElementById("loginBtn").style.display = "inline-block";
-      document.getElementById("registerBtn").style.display = "inline-block";
-    }
-
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      window.location.href = "../pages/login.html";
-    });
-
-    document.getElementById("registerBtn").addEventListener("click", () => {
-      window.location.href = "../pages/register.html";
-    });
-
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      localStorage.removeItem("sessionUser");
-      location.reload();
-    });
-  </script>
 </body>
 </html>

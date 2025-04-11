@@ -33,20 +33,38 @@ document.addEventListener("DOMContentLoaded", () => {
   // Giriş yap
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
-      window.location.href = "pages/login.html";  // Güncellendi
+      const loginPath = getLoginPath();
+      window.location.href = loginPath;
     });
   }
 
   // Kayıt ol
   if (registerBtn) {
     registerBtn.addEventListener("click", () => {
-      window.location.href = "pages/register.html";  // Güncellendi
+      const registerPath = getLoginPath().replace("login.html", "register.html");
+      window.location.href = registerPath;
     });
   }
 
-  // Sayfa giriş gerektiriyorsa ve kullanıcı yoksa login'e yönlendir
+  // Giriş yapılması gereken sayfalarda kontrol
   const requireLogin = document.body.getAttribute("data-require-login");
   if (requireLogin !== null && !currentUser) {
-    window.location.href = "pages/login.html";  // Güncellendi
+    const loginPath = getLoginPath();
+    window.location.href = loginPath + "?redirectTo=" + encodeURIComponent(window.location.pathname);
+  }
+
+  // Yalnızca admin erişimi gereken sayfa kontrolü (opsiyonel)
+  const requireAdmin = document.body.getAttribute("data-require-admin");
+  if (requireAdmin !== null && (!currentUser || currentUser.role !== "admin")) {
+    alert("Bu sayfaya yalnızca yöneticiler erişebilir.");
+    const loginPath = getLoginPath();
+    window.location.href = loginPath;
+  }
+
+  // login.html yolu dinamik olarak hesaplanır
+  function getLoginPath() {
+    const path = window.location.pathname;
+    const isInPages = path.includes("/pages/");
+    return isInPages ? "login.html" : "pages/login.html";
   }
 });
