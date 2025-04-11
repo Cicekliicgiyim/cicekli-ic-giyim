@@ -1,4 +1,4 @@
-/* Sayfa Genel Stili */
+/* Genel Stil */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -13,7 +13,7 @@ body {
 
 /* Header */
 header {
-  background-color: #ffffff;
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,7 +25,6 @@ header {
 }
 
 .logo h1, header h1 {
-  margin: 0;
   font-size: 26px;
   color: #b71c5a;
   font-weight: 600;
@@ -70,7 +69,7 @@ nav button:hover {
   color: #b71c5a;
 }
 
-/* Hero Alanı */
+/* Hero */
 .hero {
   text-align: center;
   padding: 100px 20px;
@@ -88,7 +87,7 @@ nav button:hover {
   margin-bottom: 25px;
 }
 
-/* Genel Buton */
+/* Butonlar */
 .btn, button {
   background-color: #b71c5a;
   color: white;
@@ -100,7 +99,6 @@ nav button:hover {
   transition: 0.3s;
   border: none;
   cursor: pointer;
-  display: inline-block;
 }
 
 .btn:hover, button:hover {
@@ -169,21 +167,11 @@ footer {
 }
 
 .product-card .btn {
-  background-color: #b71c5a;
-  color: white;
   padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
 }
 
-.product-card .btn:hover {
-  background-color: #8e1247;
-}
-
-/* Checkout & Form */
+/* Formlar */
 input, textarea, select {
   width: 100%;
   padding: 12px;
@@ -198,7 +186,7 @@ select {
   color: #333;
 }
 
-/* Mobil uyum */
+/* Mobil */
 @media screen and (max-width: 600px) {
   nav {
     flex-direction: column;
