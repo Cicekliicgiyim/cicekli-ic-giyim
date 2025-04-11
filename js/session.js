@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const currentUser = JSON.parse(localStorage.getItem("sessionUser"));
 
+  // Kullanıcı bilgisi varsa göster
   if (currentUser) {
     if (userInfo) userInfo.textContent = `${currentUser.name} (Giriş Yapıldı)`;
     if (greeting) greeting.textContent = `Hoş geldin, ${currentUser.name}`;
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (registerBtn) registerBtn.style.display = "inline-block";
   }
 
+  // Çıkış yap
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("sessionUser");
@@ -28,19 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Giriş yap
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
       window.location.href = "login.html";
     });
   }
 
+  // Kayıt ol
   if (registerBtn) {
     registerBtn.addEventListener("click", () => {
       window.location.href = "register.html";
     });
   }
 
-  // Eğer sayfa özel erişim istiyorsa ve giriş yapılmamışsa yönlendir
+  // Sayfa giriş gerektiriyorsa ve kullanıcı yoksa login'e yönlendir
   const requireLogin = document.body.getAttribute("data-require-login");
   if (requireLogin !== null && !currentUser) {
     window.location.href = "login.html";

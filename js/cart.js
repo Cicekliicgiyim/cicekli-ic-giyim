@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="cart-item-info">
         <h4>${item.title}</h4>
         <p class="cart-price">₺${item.price}</p>
-        <button class="remove-btn" onclick="removeFromCart(${index})">Kaldır</button>
+        <button class="remove-btn" data-index="${index}">Kaldır</button>
       </div>
     `;
 
@@ -32,6 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
   cartSummaryContainer.innerHTML = `
     <div class="total-box">Toplam: ₺${total.toFixed(2)}</div>
   `;
+
+  // Silme butonlarına tıklama olayı
+  document.querySelectorAll(".remove-btn").forEach(button => {
+    button.addEventListener("click", (e) => {
+      const index = e.target.getAttribute("data-index");
+      removeFromCart(index);
+    });
+  });
 });
 
 function removeFromCart(index) {

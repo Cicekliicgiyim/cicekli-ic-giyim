@@ -5,56 +5,7 @@
   <title>Kayıt Ol | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff8fc;
-    }
-
-    .form-container {
-      max-width: 400px;
-      margin: 80px auto;
-      padding: 20px;
-      background-color: #fff0f5;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    h2 {
-      text-align: center;
-      color: #e91e63;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    button {
-      width: 100%;
-      background-color: #e91e63;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    p {
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .error {
-      color: red;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
   <div class="form-container">
@@ -72,35 +23,6 @@
     <p>Zaten bir hesabınız var mı? <a href="login.html">Giriş Yap</a></p>
   </div>
 
-  <script>
-    document.getElementById("registerForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const username = document.getElementById("username").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const role = document.getElementById("role").value;
-
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      const existingUser = users.find(user => user.email === email);
-      if (existingUser) {
-        alert("Bu e-posta zaten kayıtlı.");
-        return;
-      }
-
-      const newUser = {
-        name: username,
-        email,
-        password,
-        role
-      };
-
-      users.push(newUser);
-      localStorage.setItem("users", JSON.stringify(users));
-      alert("Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz.");
-      window.location.href = "login.html";
-    });
-  </script>
+  <script src="js/register.js"></script>
 </body>
 </html>

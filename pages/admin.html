@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Paneli - Çiçekli İç Giyim</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <header>
     <h1>Çiçekli İç Giyim - Admin Paneli</h1>
     <nav>
-      <a href="index.html">Siteye Dön</a>
+      <a href="../index.html">Siteye Dön</a>
     </nav>
   </header>
 
@@ -41,7 +41,6 @@
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
 
-  <!-- JavaScript bağlantısı -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("add-product-btn").addEventListener("click", () => {
@@ -50,13 +49,11 @@
         const image = document.getElementById("product-image").value;
         const category = document.getElementById("product-category").value;
 
-        // Formu kontrol et ve uyarı göster
         if (!title || !price || !image || !category) {
           alert("Lütfen tüm alanları doldurun.");
           return;
         }
 
-        // Fiyatı kontrol et
         if (isNaN(price) || price <= 0) {
           alert("Geçerli bir fiyat girin.");
           return;
@@ -71,11 +68,8 @@
           category
         });
 
-        // Yeni ürünleri localStorage'a kaydet
         localStorage.setItem("products", JSON.stringify(products));
         alert("Ürün başarıyla eklendi!");
-
-        // Formu temizle
         document.getElementById("add-product-form").reset();
       });
     });

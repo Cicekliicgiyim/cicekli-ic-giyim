@@ -9,6 +9,8 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #fff8fc;
+      margin: 0;
+      padding: 0;
     }
 
     .form-container {
@@ -70,29 +72,6 @@
     <p>Hesabınız yok mu? <a href="register.html">Üye Ol</a></p>
   </div>
 
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const errorMessage = document.getElementById("error-message");
-
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const user = users.find(u => u.email === email && u.password === password);
-
-      if (user) {
-        localStorage.setItem("loggedInUser", JSON.stringify(user));
-        alert("Giriş başarılı!");
-        if (user.role === "admin") {
-          window.location.href = "admin.html";
-        } else {
-          window.location.href = "index.html";
-        }
-      } else {
-        errorMessage.style.display = "block";
-      }
-    });
-  </script>
+  <script src="js/login.js"></script>
 </body>
 </html>

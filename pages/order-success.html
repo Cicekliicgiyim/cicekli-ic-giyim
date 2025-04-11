@@ -2,14 +2,14 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Sipariş Başarılı - Çiçekli İç Giyim</title>
+  <title>Sipariş Onayı - Çiçekli İç Giyim</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Montserrat', sans-serif;
-      background-color: #f4f4f4;
+      background-color: #fff8fc;
       color: #333;
     }
 
@@ -41,19 +41,19 @@
     }
 
     main {
-      padding: 60px 20px;
-      text-align: center;
-      background-color: #ffffff;
       max-width: 600px;
       margin: 60px auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      padding: 40px 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+      text-align: center;
     }
 
     h2 {
-      font-size: 24px;
       color: #e91e63;
-      margin-bottom: 15px;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
 
     p {
@@ -114,20 +114,15 @@
   </header>
 
   <main>
-    <h2>Siparişiniz Başarıyla Alındı!</h2>
-    <p>Çiçekli İç Giyim’i tercih ettiğiniz için teşekkür ederiz.</p>
-    <a href="index.html" class="btn">Anasayfaya Dön</a>
+    <h2>Sipariş Onaylandı!</h2>
+    <p>Sipariş bilgileriniz başarıyla alınmıştır. Sipariş özetiniz e-posta adresinize gönderilmiştir.</p>
+    <a href="success.html" class="btn">Devam Et</a>
   </main>
 
   <footer>
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
 
-  <script>
-    // 5 saniye sonra otomatik yönlendirme
-    setTimeout(function() {
-      window.location.href = "index.html";
-    }, 5000);
-  </script>
+  <script src="js/order-success.js"></script>
 </body>
 </html>

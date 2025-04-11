@@ -10,15 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   products.forEach((product, index) => {
     const div = document.createElement("div");
     div.className = "product-card";
-    div.style.border = "1px solid #ccc";
-    div.style.padding = "15px";
-    div.style.marginBottom = "20px";
-    div.style.borderRadius = "8px";
-    div.style.background = "#fff";
-    div.style.textAlign = "center"; // Yazı hizalama
 
     div.innerHTML = `
-      <img src="images/${product.image}" alt="${product.title}" style="max-width: 150px; height: auto;">
+      <img src="images/${product.image}" alt="${product.title}" class="product-image">
       <h3>${product.title}</h3>
       <p><strong>₺${product.price}</strong></p>
       <p>Kategori: ${product.category}</p>
@@ -29,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Sepete ürün ekleme
 function addToCart(index) {
   const products = JSON.parse(localStorage.getItem("products")) || [];
   const product = products[index];
@@ -38,6 +31,5 @@ function addToCart(index) {
   cart.push(product);
   localStorage.setItem("cart", JSON.stringify(cart));
 
-  // Kullanıcıya bildirim
   alert(`${product.title} sepete eklendi.`);
 }

@@ -4,175 +4,10 @@
   <meta charset="UTF-8">
   <title>Sepetim | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/session.js" defer></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/session.js" defer></script>
   <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f1f1f1;
-      color: #333;
-    }
-
-    header {
-      background-color: #ffffff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo h1 {
-      color: #e91e63;
-      font-size: 26px;
-      font-weight: 600;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #555;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #e91e63;
-    }
-
-    #greeting {
-      font-weight: bold;
-      color: #e91e63;
-    }
-
-    #logoutBtn,
-    #loginBtn,
-    #registerBtn {
-      background-color: #e91e63;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.3s;
-    }
-
-    #logoutBtn:hover,
-    #loginBtn:hover,
-    #registerBtn:hover {
-      background-color: #c2185b;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    h2 {
-      color: #444;
-      margin-bottom: 25px;
-    }
-
-    .cart-item {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 12px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      border-left: 5px solid #e91e63;
-    }
-
-    .cart-item img {
-      width: 100px;
-      border-radius: 8px;
-    }
-
-    .cart-item-details {
-      flex-grow: 1;
-    }
-
-    .remove-btn {
-      background-color: #f44336;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      margin-top: 5px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .remove-btn:hover {
-      background-color: #c62828;
-    }
-
-    #cart-summary {
-      font-size: 1.2em;
-      margin-top: 20px;
-      font-weight: bold;
-      color: #333;
-    }
-
-    .btn {
-      background-color: #e91e63;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      display: inline-block;
-      transition: 0.3s;
-      margin-top: 20px;
-    }
-
-    .btn:hover {
-      background-color: #c2185b;
-    }
-
-    .empty-cart {
-      text-align: center;
-      font-size: 1.1em;
-      padding: 20px;
-      color: #888;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #fafafa;
-      font-size: 14px;
-      border-top: 1px solid #ddd;
-      margin-top: 50px;
-      color: #777;
-    }
-
-    @media screen and (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .cart-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
+    /* Buradaki <style> kısmı olduğu gibi korunabilir veya dış CSS dosyasına taşınabilir */
   </style>
 </head>
 <body data-require-login>
@@ -181,7 +16,7 @@
       <h1>Çiçekli İç Giyim</h1>
     </div>
     <nav>
-      <a href="index.html">Anasayfa</a>
+      <a href="../index.html">Anasayfa</a>
       <a href="products.html">Ürünler</a>
       <a href="cart.html">Sepetim</a>
       <a href="history.html">Sipariş Geçmişi</a>
@@ -207,7 +42,7 @@
     <p>&copy; 2025 Çiçekli İç Giyim</p>
   </footer>
 
-  <script src="js/cart.js"></script>
+  <script src="../js/cart.js"></script>
   <script>
     const sessionUser = JSON.parse(localStorage.getItem("sessionUser"));
 
