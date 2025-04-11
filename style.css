@@ -1,0 +1,207 @@
+/* Genel Stil */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo h1, header h1 {
+  font-size: 26px;
+  color: #b71c5a;
+  font-weight: 600;
+}
+
+/* Navigasyon */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+nav a, nav button {
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #444;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #b71c5a;
+}
+
+nav button {
+  background-color: #b71c5a;
+  color: white;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: #8e1247;
+}
+
+#greeting {
+  font-weight: bold;
+  color: #b71c5a;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(to right, #ececec, #e0e0e0);
+}
+
+.hero h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #b71c5a;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+/* Butonlar */
+.btn, button {
+  background-color: #b71c5a;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover, button:hover {
+  background-color: #8e1247;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #e0e0e0;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+}
+
+/* Ürünler */
+.products {
+  padding: 60px 20px;
+  background: #f9f9f9;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #b71c5a;
+  margin-bottom: 40px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.product-card .price {
+  color: #b71c5a;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.product-card .btn {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+/* Formlar */
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+select {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Mobil */
+@media screen and (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav a, nav button {
+    margin: 5px 0;
+  }
+
+  .hero h2 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+}

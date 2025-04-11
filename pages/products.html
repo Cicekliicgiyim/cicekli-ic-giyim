@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ürünler | Çiçekli İç Giyim</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body data-require-login>
+  <header>
+    <h1>Çiçekli İç Giyim</h1>
+    <nav>
+      <a href="index.html">Anasayfa</a>
+      <a href="products.html">Ürünler</a>
+      <a href="cart.html">Sepetim</a>
+      <a href="history.html">Sipariş Geçmişi</a>
+      <span id="greeting"></span>
+      <button id="loginBtn">Giriş Yap</button>
+      <button id="registerBtn">Üye Ol</button>
+      <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="products">
+      <div class="container">
+        <h2 class="section-title">Ürünler</h2>
+        <div class="product-grid" id="product-list">
+          <!-- JavaScript ile ürünler buraya yüklenecek -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Çiçekli İç Giyim</p>
+  </footer>
+
+  <!-- Ürünleri yükleme ve sepete ekleme -->
+  <script src="js/products.js" defer></script>
+
+  <!-- Oturum kontrolü -->
+  <script src="js/session.js" defer></script>
+</body>
+</html>
