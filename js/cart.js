@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     itemDiv.classList.add("cart-item");
 
     itemDiv.innerHTML = `
-      <img src="images/${item.image}" alt="${item.title}" class="cart-item-img">
+      <img src="/cicekli-ic-giyim/images/${item.image}" alt="${item.title}" class="cart-item-img">
       <div class="cart-item-info">
         <h4>${item.title}</h4>
         <p class="cart-price">₺${item.price}</p>
@@ -46,5 +46,5 @@ function removeFromCart(index) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  location.reload(); // Sayfayı yenileyerek listeyi güncelle
+  window.location.href = "/cicekli-ic-giyim/pages/cart.html"; // Sayfa yeniden yüklensin
 }

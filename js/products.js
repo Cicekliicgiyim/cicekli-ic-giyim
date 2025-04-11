@@ -24,11 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function addToCart(index) {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser) {
+    alert("Lütfen sepete ürün eklemek için giriş yapınız.");
+    window.location.href = "login.html";
+    return;
+  }
+
   const products = JSON.parse(localStorage.getItem("products")) || [];
   const product = products[index];
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push(product);
+
+  // Ürüne kullanıcı eklensin ki siparişe atanabilsin
+  const cartItem = {
+    ...product,
+    userEmail: currentUser.email
+  };
+
+  cart.push(cartItem);
   localStorage.setItem("cart", JSON.stringify(cart));
 
   alert(`${product.title} sepete eklendi.`);

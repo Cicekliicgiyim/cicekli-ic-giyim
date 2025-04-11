@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = JSON.parse(localStorage.getItem("sessionUser")); // Oturumdaki kullanıcı
   const allOrders = JSON.parse(localStorage.getItem("orders")) || [];
   const orderContainer = document.getElementById("order-history");
 
