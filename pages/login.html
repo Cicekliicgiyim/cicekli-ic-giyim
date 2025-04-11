@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Giriş Yap | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -72,7 +72,7 @@
     <p>Hesabınız yok mu? <a href="register.html">Üye Ol</a></p>
   </div>
 
-  <script src="js/login.js"></script>
+  <script src="../js/login.js"></script>
 
   <script>
     // Giriş yapma fonksiyonu
@@ -82,12 +82,11 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      // Burada basit bir doğrulama var. Gerçek dünyada sunucu tarafında doğrulama yapılır.
-      if (email === "user@example.com" && password === "12345") {  // Bu kısmı güncellemek gerekebilir
-        sessionStorage.setItem('user', email);  // Oturum bilgisi kaydedildi
-        window.location.href = 'index.html';  // Giriş başarılı, anasayfaya yönlendir
+      if (email === "user@example.com" && password === "12345") {
+        sessionStorage.setItem('user', email);
+        window.location.href = '../index.html';
       } else {
-        document.getElementById('error-message').style.display = 'block';  // Hata mesajını göster
+        document.getElementById('error-message').style.display = 'block';
       }
     };
   </script>
