@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ürünler - Çiçekli İç Giyim</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Çiçekli İç Giyim</h1>
+    <nav>
+      <a href="index.html">Anasayfa</a>
+      <a href="products.html">Ürünler</a>
+      <a href="cart.html">Sepetim</a>
+      <a href="history.html">Sipariş Geçmişi</a>
+      <span id="greeting"></span>
+      <button id="loginBtn">Giriş Yap</button>
+      <button id="registerBtn">Üye Ol</button>
+      <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="filters">
+      <input type="text" id="searchInput" placeholder="Ürün ara..." />
+      <select id="sortOptions">
+        <option value="default">Sırala</option>
+        <option value="priceAsc">Fiyata göre artan</option>
+        <option value="priceDesc">Fiyata göre azalan</option>
+      </select>
+    </section>
+
+    <section id="productsContainer">
+      <!-- Ürünler burada dinamik olarak listelenecek -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Çiçekli İç Giyim. Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script src="js/products.js" defer></script>
+  <script src="js/session.js" defer></script>
+</body>
+</html>
