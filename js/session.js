@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("sessionUser");
-      window.location.reload();
+      window.location.href = "/cicekli-ic-giyim/index.html";
     });
   }
 
@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const requireLogin = document.body.getAttribute("data-require-login");
   if (requireLogin !== null && !currentUser) {
-    window.location.href = "/cicekli-ic-giyim/login.html?redirectTo=" + encodeURIComponent(window.location.pathname);
+    window.location.href =
+      "/cicekli-ic-giyim/login.html?redirectTo=" + encodeURIComponent(window.location.pathname);
   }
 
   const requireAdmin = document.body.getAttribute("data-require-admin");
