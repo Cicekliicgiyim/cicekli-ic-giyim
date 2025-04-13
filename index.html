@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>Anasayfa | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/cicekli-ic-giyim/css/style.css">
-  <script src="/cicekli-ic-giyim/js/session.js" defer></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/session.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,10 +14,10 @@
       <h1>Çiçekli İç Giyim</h1>
     </div>
     <nav>
-      <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
-      <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
-      <a href="/cicekli-ic-giyim/cart.html">Sepetim</a>
-      <a href="/cicekli-ic-giyim/history.html">Sipariş Geçmişi</a>
+      <a href="index.html">Anasayfa</a>
+      <a href="products.html">Ürünler</a>
+      <a href="cart.html">Sepetim</a>
+      <a href="history.html">Sipariş Geçmişi</a>
       <span id="greeting"></span>
       <button id="loginBtn">Giriş Yap</button>
       <button id="registerBtn">Üye Ol</button>
@@ -30,7 +30,7 @@
       <div class="container">
         <h2>Şıklığın ve Rahatlığın Adresi</h2>
         <p>Tarzınıza özel iç giyim koleksiyonlarını şimdi keşfedin.</p>
-        <a href="/cicekli-ic-giyim/products.html" class="btn">Alışverişe Başla</a>
+        <a href="products.html" class="btn">Alışverişe Başla</a>
       </div>
     </section>
   </main>
@@ -66,16 +66,16 @@
       });
 
       loginBtn.addEventListener("click", () => {
-        window.location.href = "/cicekli-ic-giyim/pages/login.html";
+        window.location.href = "pages/login.html";
       });
 
       registerBtn.addEventListener("click", () => {
-        window.location.href = "/cicekli-ic-giyim/pages/register.html";
+        window.location.href = "pages/register.html";
       });
 
       const requireLogin = document.body.getAttribute("data-require-login");
       if (requireLogin !== null && !currentUser) {
-        window.location.href = "/cicekli-ic-giyim/pages/login.html";
+        window.location.href = "pages/login.html";
       }
     });
   </script>
