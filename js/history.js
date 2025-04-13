@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const orderHistoryContainer = document.getElementById("order-history");
 
-  // Kullanıcının giriş yapıp yapmadığını kontrol et
-  const currentUser = sessionStorage.getItem("currentUser");
+  // Giriş yapmış kullanıcıyı al
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   if (!currentUser) {
     orderHistoryContainer.innerHTML = "<p>Lütfen sipariş geçmişinizi görüntülemek için giriş yapın.</p>";
     return;
@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // localStorage'dan sipariş geçmişini al
   const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {};
+  const userOrders = orderHistory[currentUser.email] || [];
 
-  const userOrders = orderHistory[currentUser] || [];
-
+  // Kullanıcının hiç siparişi yoksa
   if (userOrders.length === 0) {
     orderHistoryContainer.innerHTML = "<p>Henüz hiç siparişiniz yok.</p>";
     return;
   }
 
-  // Siparişleri göster
+  // Siparişleri listele
   userOrders.forEach((order, index) => {
     const orderElement = document.createElement("div");
     orderElement.classList.add("order");
@@ -26,17 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
     orderElement.innerHTML = `
       <h3>Sipariş #${index + 1}</h3>
       <ul>
-        ${order.items
-          .map(
-            (item) => `
-          <li>
-            ${item.name} - ${item.quantity} adet - ${item.price} TL
-          </li>
-        `
-          )
-          .join("")}
+        ${order.items.map(item => `
+          <li>${item.title} - 1 adet - ₺${item.price}</li>
+        `).join("")}
       </ul>
-      <strong>Toplam: ${order.total} TL</strong>
+      <strong>Toplam: ₺${order.total}</strong>
       <p>Tarih: ${order.date || "Bilinmiyor"}</p>
     `;
 

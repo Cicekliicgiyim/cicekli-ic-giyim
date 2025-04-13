@@ -1,39 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const currentUser = JSON.parse(localStorage.getItem("sessionUser")); // GÜNCELLENDİ
-    const allOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    const orderContainer = document.getElementById("order-history");
-  
-    // Giriş yapılmamışsa uyarı göster
-    if (!currentUser) {
-      orderContainer.innerHTML = "<p>Lütfen önce giriş yapınız.</p>";
-      return;
-    }
-  
-    // Kullanıcıya ait siparişleri filtrele
-    const userOrders = allOrders.filter(order => order.email === currentUser.email);
-  
-    if (userOrders.length === 0) {
-      orderContainer.innerHTML = "<p>Henüz siparişiniz bulunmamaktadır.</p>";
-      return;
-    }
-  
-    // Siparişleri listele
-    userOrders.forEach((order, index) => {
-      const div = document.createElement("div");
-      div.className = "order";
-  
-      const itemsHTML = order.items?.map(item => `
-        <li>${item.title} - ₺${item.price}</li>
-      `).join("") || "<li>Ürün bilgisi yok</li>";
-  
-      div.innerHTML = `
-        <h3>Sipariş ${index + 1}</h3>
-        <ul>${itemsHTML}</ul>
-        <p><strong>Tarih:</strong> ${order.date || "Bilinmiyor"}</p>
-        <p><strong>Toplam:</strong> ₺${order.total?.toFixed(2) || "0.00"}</p>
-      `;
-  
-      orderContainer.appendChild(div);
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const orderHistoryContainer = document.getElementById("order-history");
+
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  if (!currentUser) {
+    orderHistoryContainer.innerHTML = "<p>Lütfen sipariş geçmişinizi görüntülemek için giriş yapın.</p>";
+    return;
+  }
+
+  const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {};
+  const userOrders = orderHistory[currentUser.email] || [];
+
+  if (userOrders.length === 0) {
+    orderHistoryContainer.innerHTML = "<p>Henüz hiç siparişiniz yok.</p>";
+    return;
+  }
+
+  userOrders.forEach((order, index) => {
+    const orderElement = document.createElement("div");
+    orderElement.classList.add("order");
+
+    orderElement.innerHTML = `
+      <h3>Sipariş #${index + 1}</h3>
+      <ul>
+        ${order.items
+          .map(
+            (item) => `
+              <li>${item.title} - 1 adet - ₺${item.price}</li>
+            `
+          )
+          .join("")}
+      </ul>
+      <strong>Toplam: ₺${order.total}</strong>
+      <p>Tarih: ${order.date || "Bilinmiyor"}</p>
+    `;
+
+    orderHistoryContainer.appendChild(orderElement);
   });
-  
+});

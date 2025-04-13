@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartSummaryContainer = document.getElementById("cart-summary");
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  if (cart.length === 0) {
+  if (!cart.length) {
     cartItemsContainer.innerHTML = `<div class="empty-cart">Sepetinizde ürün bulunmamaktadır.</div>`;
     cartSummaryContainer.innerHTML = `<div class="total-box">Toplam: ₺0.00</div>`;
     return;
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     itemDiv.classList.add("cart-item");
 
     itemDiv.innerHTML = `
-      <img src="/cicekli-ic-giyim/images/${item.image}" alt="${item.title}" class="cart-item-img">
+      <img src="/images/${item.image}" alt="${item.title}" class="cart-item-img">
       <div class="cart-item-info">
         <h4>${item.title}</h4>
         <p class="cart-price">₺${item.price}</p>
@@ -33,18 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="total-box">Toplam: ₺${total.toFixed(2)}</div>
   `;
 
-  // Silme butonlarına tıklama olayı
   document.querySelectorAll(".remove-btn").forEach(button => {
     button.addEventListener("click", (e) => {
-      const index = e.target.getAttribute("data-index");
+      const index = e.target.dataset.index;
       removeFromCart(index);
     });
   });
 });
 
 function removeFromCart(index) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  window.location.href = "/cicekli-ic-giyim/pages/cart.html"; // Sayfa yeniden yüklensin
+  location.reload(); // Sayfayı yeniden yükle
 }

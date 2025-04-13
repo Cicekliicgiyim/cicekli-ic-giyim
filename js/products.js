@@ -2,24 +2,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const productList = document.getElementById("product-list");
   const products = JSON.parse(localStorage.getItem("products")) || [];
 
-  if (products.length === 0) {
+  if (!products.length) {
     productList.innerHTML = "<p>Henüz ürün eklenmedi.</p>";
     return;
   }
 
   products.forEach((product, index) => {
-    const div = document.createElement("div");
-    div.className = "product-card";
+    const card = document.createElement("div");
+    card.className = "product-card";
 
-    div.innerHTML = `
+    card.innerHTML = `
       <img src="images/${product.image}" alt="${product.title}" class="product-image">
       <h3>${product.title}</h3>
       <p><strong>₺${product.price}</strong></p>
       <p>Kategori: ${product.category}</p>
-      <button onclick='addToCart(${index})'>Sepete Ekle</button>
+      <button data-index="${index}" class="add-to-cart-btn">Sepete Ekle</button>
     `;
 
-    productList.appendChild(div);
+    productList.appendChild(card);
+  });
+
+  // Sepete Ekle butonlarına tıklama işlemi
+  document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+    button.addEventListener("click", (e) => {
+      const index = e.target.dataset.index;
+      addToCart(parseInt(index));
+    });
   });
 });
 
@@ -27,16 +35,16 @@ function addToCart(index) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
     alert("Lütfen sepete ürün eklemek için giriş yapınız.");
-    window.location.href = "login.html";
+    window.location.href = "/login.html";
     return;
   }
 
   const products = JSON.parse(localStorage.getItem("products")) || [];
   const product = products[index];
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // Ürüne kullanıcı eklensin ki siparişe atanabilsin
+  // Ürüne kullanıcı bilgisi ekleniyor
   const cartItem = {
     ...product,
     userEmail: currentUser.email

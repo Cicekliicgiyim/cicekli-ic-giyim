@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Paneli - Çiçekli İç Giyim</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Çiçekli İç Giyim - Admin Paneli</h1>
+    <nav>
+      <a href="/index.html">Siteye Dön</a>
+    </nav>
+  </header>
+
+  <main style="padding: 40px;">
+    <h2>Yeni Ürün Ekle</h2>
+    <form id="add-product-form">
+      <label>Ürün Adı:</label><br>
+      <input type="text" id="product-title" required><br><br>
+
+      <label>Fiyat:</label><br>
+      <input type="number" id="product-price" required min="0"><br><br>
+
+      <label>Görsel (örneğin: atlet.jpg):</label><br>
+      <input type="text" id="product-image" required><br><br>
+
+      <label>Kategori:</label><br>
+      <select id="product-category" required>
+        <option value="">Kategori Seçin</option>
+        <option value="Atlet">Atlet</option>
+        <option value="Sütyen">Sütyen</option>
+        <option value="İç Çamaşırı">İç Çamaşırı</option>
+      </select><br><br>
+
+      <button type="button" id="add-product-btn">Yeni Ürün Ekle</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Çiçekli İç Giyim</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("add-product-btn").addEventListener("click", () => {
+        const title = document.getElementById("product-title").value;
+        const price = document.getElementById("product-price").value;
+        const image = document.getElementById("product-image").value;
+        const category = document.getElementById("product-category").value;
+
+        if (!title || !price || !image || !category) {
+          alert("Lütfen tüm alanları doldurun.");
+          return;
+        }
+
+        if (isNaN(price) || price <= 0) {
+          alert("Geçerli bir fiyat girin.");
+          return;
+        }
+
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+
+        products.push({
+          title,
+          price,
+          image,
+          category
+        });
+
+        localStorage.setItem("products", JSON.stringify(products));
+        alert("Ürün başarıyla eklendi!");
+        document.getElementById("add-product-form").reset();
+      });
+    });
+  </script>
+</body>
+</html>
