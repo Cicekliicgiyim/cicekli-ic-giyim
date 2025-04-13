@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!currentUser) {
     alert("Sipariş verebilmek için giriş yapmalısınız.");
-    window.location.href = "pages/login.html";
+    window.location.href = "/cicekli-ic-giyim/login.html";
     return;
   }
 
@@ -22,6 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!name || !email || !phone || !city || !district || !address || !shippingCompany) {
       alert("Lütfen tüm bilgileri eksiksiz doldurun.");
+      return;
+    }
+
+    // E-posta kontrolü
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Geçerli bir e-posta adresi giriniz.");
+      return;
+    }
+
+    // Telefon kontrolü
+    const phoneRegex = /^05\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Telefon numarasını 05xx xxx xx xx formatında giriniz.");
       return;
     }
 
@@ -53,6 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("cart");
 
     alert("Siparişiniz başarıyla alındı!");
-    window.location.href = "order-success.html";
+    window.location.href = "/cicekli-ic-giyim/order-success.html";
   });
 });
