@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>Anasayfa | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/session.js" defer></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/session.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -147,10 +147,10 @@
       <h1>Çiçekli İç Giyim</h1>
     </div>
     <nav>
-      <a href="index.html">Anasayfa</a>
-      <a href="products.html">Ürünler</a>
-      <a href="cart.html">Sepetim</a>
-      <a href="history.html">Sipariş Geçmişi</a>
+      <a href="/index.html">Anasayfa</a>
+      <a href="/products.html">Ürünler</a>
+      <a href="/cart.html">Sepetim</a>
+      <a href="/history.html">Sipariş Geçmişi</a>
       <span id="greeting"></span>
       <button id="loginBtn">Giriş Yap</button>
       <button id="registerBtn">Üye Ol</button>
@@ -163,7 +163,7 @@
       <div class="container">
         <h2>Şıklığın ve Rahatlığın Adresi</h2>
         <p>Tarzınıza özel iç giyim koleksiyonlarını şimdi keşfedin.</p>
-        <a href="products.html" class="btn">Alışverişe Başla</a>
+        <a href="/products.html" class="btn">Alışverişe Başla</a>
       </div>
     </section>
   </main>
@@ -182,10 +182,9 @@
 
       const currentUser = JSON.parse(localStorage.getItem("sessionUser"));
 
-      // Kullanıcı bilgisi varsa göster
       if (currentUser) {
-        if (userInfo) userInfo.textContent = ${currentUser.name} (Giriş Yapıldı);
-        if (greeting) greeting.textContent = Hoş geldin, ${currentUser.name};
+        if (userInfo) userInfo.textContent = `${currentUser.name} (Giriş Yapıldı)`;
+        if (greeting) greeting.textContent = `Hoş geldin, ${currentUser.name}`;
         if (logoutBtn) logoutBtn.style.display = "inline-block";
         if (loginBtn) loginBtn.style.display = "none";
         if (registerBtn) registerBtn.style.display = "none";
@@ -197,7 +196,6 @@
         if (registerBtn) registerBtn.style.display = "inline-block";
       }
 
-      // Çıkış yap
       if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
           localStorage.removeItem("sessionUser");
@@ -205,24 +203,21 @@
         });
       }
 
-      // Giriş yap
       if (loginBtn) {
         loginBtn.addEventListener("click", () => {
-          window.location.href = "pages/login.html";  // Güncellendi
+          window.location.href = "/pages/login.html";
         });
       }
 
-      // Kayıt ol
       if (registerBtn) {
         registerBtn.addEventListener("click", () => {
-          window.location.href = "pages/register.html";  // Güncellendi
+          window.location.href = "/pages/register.html";
         });
       }
 
-      // Sayfa giriş gerektiriyorsa ve kullanıcı yoksa login'e yönlendir
       const requireLogin = document.body.getAttribute("data-require-login");
       if (requireLogin !== null && !currentUser) {
-        window.location.href = "pages/login.html";  // Güncellendi
+        window.location.href = "/pages/login.html";
       }
     });
   </script>
