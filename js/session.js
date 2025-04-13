@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const currentUser = JSON.parse(localStorage.getItem("sessionUser"));
 
-  const rootPath = "/cicekli-ic-giyim"; // GitHub Pages kök dizin
-
-  // Kullanıcı bilgisi varsa göster
   if (currentUser) {
     if (userInfo) userInfo.textContent = `${currentUser.name} (Giriş Yapıldı)`;
     if (greeting) greeting.textContent = `Hoş geldin, ${currentUser.name}`;
@@ -24,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (registerBtn) registerBtn.style.display = "inline-block";
   }
 
-  // Çıkış yap
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("sessionUser");
@@ -32,31 +28,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Giriş yap
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
-      window.location.href = `${rootPath}/pages/login.html`;
+      window.location.href = "/cicekli-ic-giyim/login.html";
     });
   }
 
-  // Kayıt ol
   if (registerBtn) {
     registerBtn.addEventListener("click", () => {
-      window.location.href = `${rootPath}/pages/register.html`;
+      window.location.href = "/cicekli-ic-giyim/register.html";
     });
   }
 
-  // Oturum gerekli sayfa kontrolü
   const requireLogin = document.body.getAttribute("data-require-login");
   if (requireLogin !== null && !currentUser) {
-    const redirectPath = encodeURIComponent(window.location.pathname);
-    window.location.href = `${rootPath}/pages/login.html?redirectTo=${redirectPath}`;
+    window.location.href = "/cicekli-ic-giyim/login.html?redirectTo=" + encodeURIComponent(window.location.pathname);
   }
 
-  // Admin kontrolü
   const requireAdmin = document.body.getAttribute("data-require-admin");
   if (requireAdmin !== null && (!currentUser || currentUser.role !== "admin")) {
     alert("Bu sayfaya yalnızca yöneticiler erişebilir.");
-    window.location.href = `${rootPath}/pages/login.html`;
+    window.location.href = "/cicekli-ic-giyim/login.html";
   }
 });
