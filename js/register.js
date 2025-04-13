@@ -4,7 +4,7 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     const username = document.getElementById("username").value.trim();
     const email = document.getElementById("email").value.trim().toLowerCase();
     const password = document.getElementById("password").value;
-    const role = "user"; // Her zaman sadece 'user' olarak kayıt olsun  
+    const role = "user";
     if (!username || !email || !password || !role) {
       alert("Lütfen tüm alanları doldurun.");
       return;
