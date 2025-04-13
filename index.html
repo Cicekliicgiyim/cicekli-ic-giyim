@@ -4,142 +4,9 @@
   <meta charset="UTF-8">
   <title>Anasayfa | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/session.js" defer></script>
+  <link rel="stylesheet" href="/cicekli-ic-giyim/css/style.css">
+  <script src="/cicekli-ic-giyim/js/session.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    body {
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    header {
-      background-color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .logo h1 {
-      margin: 0;
-      font-size: 26px;
-      color: #c2185b;
-      font-weight: 600;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #555;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #c2185b;
-    }
-
-    #greeting {
-      font-weight: bold;
-      color: #c2185b;
-    }
-
-    #logoutBtn,
-    #loginBtn,
-    #registerBtn {
-      background-color: #c2185b;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.3s;
-    }
-
-    #logoutBtn:hover,
-    #loginBtn:hover,
-    #registerBtn:hover {
-      background-color: #a3154b;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background: linear-gradient(to right, #e8e8e8, #f6f6f6);
-      border-bottom: 1px solid #ddd;
-    }
-
-    .hero h2 {
-      font-size: 36px;
-      margin-bottom: 15px;
-      color: #c2185b;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin-bottom: 25px;
-      color: #555;
-    }
-
-    .btn {
-      background-color: #c2185b;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #a3154b;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #e0e0e0;
-      font-size: 14px;
-      color: #666;
-      border-top: 1px solid #ccc;
-    }
-
-    @media screen and (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero h2 {
-        font-size: 28px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -147,10 +14,10 @@
       <h1>Çiçekli İç Giyim</h1>
     </div>
     <nav>
-      <a href="/index.html">Anasayfa</a>
-      <a href="/products.html">Ürünler</a>
-      <a href="/cart.html">Sepetim</a>
-      <a href="/history.html">Sipariş Geçmişi</a>
+      <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
+      <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
+      <a href="/cicekli-ic-giyim/cart.html">Sepetim</a>
+      <a href="/cicekli-ic-giyim/history.html">Sipariş Geçmişi</a>
       <span id="greeting"></span>
       <button id="loginBtn">Giriş Yap</button>
       <button id="registerBtn">Üye Ol</button>
@@ -163,7 +30,7 @@
       <div class="container">
         <h2>Şıklığın ve Rahatlığın Adresi</h2>
         <p>Tarzınıza özel iç giyim koleksiyonlarını şimdi keşfedin.</p>
-        <a href="/products.html" class="btn">Alışverişe Başla</a>
+        <a href="/cicekli-ic-giyim/products.html" class="btn">Alışverişe Başla</a>
       </div>
     </section>
   </main>
@@ -174,7 +41,6 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const userInfo = document.getElementById("user-info");
       const greeting = document.getElementById("greeting");
       const logoutBtn = document.getElementById("logoutBtn");
       const loginBtn = document.getElementById("loginBtn");
@@ -183,41 +49,33 @@
       const currentUser = JSON.parse(localStorage.getItem("sessionUser"));
 
       if (currentUser) {
-        if (userInfo) userInfo.textContent = `${currentUser.name} (Giriş Yapıldı)`;
-        if (greeting) greeting.textContent = `Hoş geldin, ${currentUser.name}`;
-        if (logoutBtn) logoutBtn.style.display = "inline-block";
-        if (loginBtn) loginBtn.style.display = "none";
-        if (registerBtn) registerBtn.style.display = "none";
+        greeting.textContent = `Hoş geldin, ${currentUser.name}`;
+        logoutBtn.style.display = "inline-block";
+        loginBtn.style.display = "none";
+        registerBtn.style.display = "none";
       } else {
-        if (userInfo) userInfo.textContent = "";
-        if (greeting) greeting.textContent = "";
-        if (logoutBtn) logoutBtn.style.display = "none";
-        if (loginBtn) loginBtn.style.display = "inline-block";
-        if (registerBtn) registerBtn.style.display = "inline-block";
+        greeting.textContent = "";
+        logoutBtn.style.display = "none";
+        loginBtn.style.display = "inline-block";
+        registerBtn.style.display = "inline-block";
       }
 
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-          localStorage.removeItem("sessionUser");
-          window.location.reload();
-        });
-      }
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("sessionUser");
+        window.location.reload();
+      });
 
-      if (loginBtn) {
-        loginBtn.addEventListener("click", () => {
-          window.location.href = "/pages/login.html";
-        });
-      }
+      loginBtn.addEventListener("click", () => {
+        window.location.href = "/cicekli-ic-giyim/pages/login.html";
+      });
 
-      if (registerBtn) {
-        registerBtn.addEventListener("click", () => {
-          window.location.href = "/pages/register.html";
-        });
-      }
+      registerBtn.addEventListener("click", () => {
+        window.location.href = "/cicekli-ic-giyim/pages/register.html";
+      });
 
       const requireLogin = document.body.getAttribute("data-require-login");
       if (requireLogin !== null && !currentUser) {
-        window.location.href = "/pages/login.html";
+        window.location.href = "/cicekli-ic-giyim/pages/login.html";
       }
     });
   </script>
