@@ -147,10 +147,10 @@
       <h1>Çiçekli İç Giyim</h1>
     </div>
     <nav>
-      <a href="/index.html">Anasayfa</a>
-      <a href="/products.html">Ürünler</a>
-      <a href="/cart.html">Sepetim</a>
-      <a href="/history.html">Sipariş Geçmişi</a>
+      <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
+      <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
+      <a href="/cicekli-ic-giyim/cart.html">Sepetim</a>
+      <a href="/cicekli-ic-giyim/history.html">Sipariş Geçmişi</a>
       <span id="greeting"></span>
       <button id="loginBtn">Giriş Yap</button>
       <button id="registerBtn">Üye Ol</button>
@@ -163,7 +163,7 @@
       <div class="container">
         <h2>Şıklığın ve Rahatlığın Adresi</h2>
         <p>Tarzınıza özel iç giyim koleksiyonlarını şimdi keşfedin.</p>
-        <a href="/products.html" class="btn">Alışverişe Başla</a>
+        <a href="/cicekli-ic-giyim/products.html" class="btn">Alışverişe Başla</a>
       </div>
     </section>
   </main>
@@ -205,19 +205,19 @@
 
       if (loginBtn) {
         loginBtn.addEventListener("click", () => {
-          window.location.href = "/login.html";
+          window.location.href = "/cicekli-ic-giyim/login.html";
         });
       }
 
       if (registerBtn) {
         registerBtn.addEventListener("click", () => {
-          window.location.href = "/register.html";
+          window.location.href = "/cicekli-ic-giyim/register.html";
         });
       }
 
       const requireLogin = document.body.getAttribute("data-require-login");
       if (requireLogin !== null && !currentUser) {
-        window.location.href = "/login.html";
+        window.location.href = "/cicekli-ic-giyim/login.html";
       }
     });
   </script>
