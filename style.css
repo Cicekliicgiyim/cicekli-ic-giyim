@@ -205,3 +205,17 @@ select {
     font-size: 16px;
   }
 }
+.checkout-btn {
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(183, 28, 90, 0.3);
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  padding: 14px 28px;
+  display: inline-block;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05);
+  background-color: #a1164d;
+}
