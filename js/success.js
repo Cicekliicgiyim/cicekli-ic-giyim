@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Geri sayım süresi (saniye)
     let countdown = 10;
-    const redirectUrl = "/index.html";
+    const redirectUrl = "/cicekli-ic-giyim/index.html";
   
     // Geri sayım göstermek için paragraf oluştur
     const countdownMessage = document.createElement("p");

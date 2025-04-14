@@ -35,7 +35,7 @@ function addToCart(index) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
     alert("Lütfen sepete ürün eklemek için giriş yapınız.");
-    window.location.href = "/login.html";
+    window.location.href = "/cicekli-ic-giyim/login.html";
     return;
   }
 

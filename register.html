@@ -82,6 +82,11 @@
     .form-container a:hover {
       text-decoration: underline;
     }
+
+    /* Doğrulama kodu butonu için ekstra boşluk */
+    #sendCodeBtn {
+      margin-bottom: 16px;
+    }
   </style>
 </head>
 <body>
@@ -91,6 +96,10 @@
     <form id="registerForm">
       <input type="text" id="username" placeholder="Kullanıcı Adı" required>
       <input type="email" id="email" placeholder="E-posta" required>
+
+      <!-- Doğrulama kodu gönderme butonu -->
+      <button type="button" id="sendCodeBtn">📩 Kodu Gönder</button>
+
       <input type="text" id="phone" placeholder="Telefon Numarası (05xx...)" required>
       <input type="password" id="password" placeholder="Şifre" required>
       <select id="role">
