@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sepetim | Çiçekli İç Giyim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
+  <script src="/js/session.js" defer></script>
+</head>
+<body data-require-login>
+  <header>
+    <div class="logo">
+      <h1>Çiçekli İç Giyim</h1>
+    </div>
+    <nav>
+      <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
+      <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
+      <a href="/cicekli-ic-giyim/cart.html">Sepetim</a>
+      <a href="/cicekli-ic-giyim/history.html">Sipariş Geçmişi</a>
+      <span id="greeting"></span>
+      <button id="loginBtn">Giriş Yap</button>
+      <button id="registerBtn">Üye Ol</button>
+      <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Sepetim</h2>
+    <div id="cart-items"></div>
+    <div id="cart-summary"></div>
+    <a href="/cicekli-ic-giyim/checkout.html" class="btn">Ödemeye Geç</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Çiçekli İç Giyim</p>
+  </footer>
+
+  <script src="/js/cart.js"></script>
+  <script>
+    const sessionUser = JSON.parse(localStorage.getItem("sessionUser"));
+
+    if (sessionUser) {
+      document.getElementById("greeting").innerText = `Hoş geldin, ${sessionUser.name}`;
+      document.getElementById("logoutBtn").style.display = "inline-block";
+      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("registerBtn").style.display = "none";
+    } else {
+      document.getElementById("greeting").innerText = "";
+      document.getElementById("logoutBtn").style.display = "none";
+      document.getElementById("loginBtn").style.display = "inline-block";
+      document.getElementById("registerBtn").style.display = "inline-block";
+    }
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      window.location.href = "/cicekli-ic-giyim/login.html";
+    });
+
+    document.getElementById("registerBtn").addEventListener("click", () => {
+      window.location.href = "/cicekli-ic-giyim/register.html";
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("sessionUser");
+      location.reload();
+    });
+  </script>
+</body>
+</html>
