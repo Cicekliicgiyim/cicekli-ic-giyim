@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const container    = document.getElementById("productsContainer");
-  const searchInput  = document.getElementById("searchInput");
-  const sortOptions  = document.getElementById("sortOptions");
+  const container      = document.getElementById("productsContainer");
+  const searchInput    = document.getElementById("searchInput");
+  const sortOptions    = document.getElementById("sortOptions");
   const categoryFilter = document.getElementById("categoryFilter");
 
   let products = JSON.parse(localStorage.getItem("products")) || [];
@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("div");
       card.className = "product-card";
       card.innerHTML = `
-        <img src="/cicekli-ic-giyim/images/${product.image || 'placeholder.jpg'}"
+        <img src="./images/${product.image || 'placeholder.jpg'}"
              alt="${product.title}"
-             onerror="this.src='/cicekli-ic-giyim/images/placeholder.jpg'"
+             onerror="this.src='./images/placeholder.jpg'"
              style="width:100%; height:200px; object-fit:cover; border-radius:6px; margin-bottom:15px;">
         <h3>${product.title}</h3>
         <p class="price">₺${parseFloat(product.price).toFixed(2)}</p>
@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(card);
     });
 
-    // Sepete ekle butonları
     document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         const idx = parseInt(e.target.dataset.index);
@@ -64,12 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return list;
   }
 
-  // Olayları dinle
-  searchInput?.addEventListener("input",  () => renderProducts(getFiltered()));
-  sortOptions?.addEventListener("change", () => renderProducts(getFiltered()));
+  searchInput?.addEventListener("input",    () => renderProducts(getFiltered()));
+  sortOptions?.addEventListener("change",   () => renderProducts(getFiltered()));
   categoryFilter?.addEventListener("change", () => renderProducts(getFiltered()));
 
-  // İlk yükleme
   if (!products.length) {
     container.innerHTML = '<p style="text-align:center; color:#aaa; padding:40px 0;">Henüz ürün eklenmedi.</p>';
   } else {
@@ -85,7 +82,7 @@ function addToCart(product) {
     return;
   }
 
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const cart     = JSON.parse(localStorage.getItem("cart") || "[]");
   const existing = cart.find(item =>
     item.title === product.title && item.userEmail === currentUser.email
   );
