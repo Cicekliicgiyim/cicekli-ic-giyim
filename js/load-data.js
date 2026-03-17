@@ -25,7 +25,7 @@ function loadData() {
       id: 4,
       title: "Çiçek Desenli Takım",
       price: 349.90,
-      image: "takim.jpg",
+      image: "sutyen.jpg",
       category: "takim"
     },
     {
@@ -39,7 +39,7 @@ function loadData() {
       id: 6,
       title: "Pamuklu Külot Seti (3'lü)",
       price: 199.90,
-      image: "kilot.jpg",
+      image: "sutyen.jpg",
       category: "kilot"
     }
   ];
