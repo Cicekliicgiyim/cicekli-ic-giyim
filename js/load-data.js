@@ -51,17 +51,9 @@ function loadData() {
       password: "admin123",
       role: "admin",
       phone: ""
-    },
-    {
-      username: "test_kullanici",
-      email: "test@atilla.com",
-      password: "test123",
-      role: "user",
-      phone: "05001234567"
     }
   ];
 
-  // Mevcut kullanıcıları koru, sadece örnek kullanıcıları ekle
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
   sampleUsers.forEach(sample => {
     if (!existingUsers.find(u => u.email === sample.email)) {
@@ -72,16 +64,13 @@ function loadData() {
   localStorage.setItem("products", JSON.stringify(sampleProducts));
   localStorage.setItem("users", JSON.stringify(existingUsers));
 
-  // Sipariş geçmişi ve sepeti sıfırla
   localStorage.removeItem("cart");
   localStorage.removeItem("orderHistory");
   localStorage.removeItem("lastOrderNumber");
 
-  // UI'da başarı mesajı göster
   const msg = document.getElementById("statusMessage");
   if (msg) {
-    msg.textContent = "✅ " + sampleProducts.length + " ürün ve " +
-      sampleUsers.length + " kullanıcı başarıyla yüklendi!";
+    msg.textContent = "✅ " + sampleProducts.length + " ürün başarıyla yüklendi!";
     msg.className = "success";
   }
 
