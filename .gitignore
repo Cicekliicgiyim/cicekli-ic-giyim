@@ -1,4 +1,30 @@
+# Bağımlılıklar
 node_modules/
+
+# Ortam değişkenleri
 .env
+.env.local
+.env.production
+
+# İşletim sistemi dosyaları
 .DS_Store
+Thumbs.db
+desktop.ini
+
+# Log dosyaları
 *.log
+npm-debug.log*
+
+# Editör/IDE dosyaları
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Build çıktıları
+dist/
+build/
+
+# Geçici dosyalar
+*.tmp
+*.swp

@@ -2,34 +2,29 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Sipariş Başarılı - Çiçekli İç Giyim</title>
-  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sipariş Başarılı - Atilla Çiçekli İç Giyim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
   <style>
-    /* Dahili stiller (değişmedi) */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      padding: 0;
       font-family: 'Montserrat', sans-serif;
       background-color: #f4f4f4;
       color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-
     header {
-      background-color: #ffffff;
+      background-color: #fff;
       padding: 20px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #ddd;
     }
-
-    header h1 {
-      color: #e91e63;
-      font-size: 24px;
-      margin: 0;
-    }
-
+    header h1 { color: #e91e63; font-size: 24px; }
     nav a {
       margin-left: 15px;
       text-decoration: none;
@@ -37,32 +32,39 @@
       font-weight: 500;
       transition: color 0.3s;
     }
-
-    nav a:hover {
-      color: #e91e63;
-    }
-
+    nav a:hover { color: #e91e63; }
     main {
+      flex: 1;
       padding: 60px 20px;
       text-align: center;
-      background-color: #ffffff;
+      background-color: #fff;
       max-width: 600px;
+      width: 100%;
       margin: 60px auto;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.07);
     }
-
-    h2 {
-      font-size: 24px;
-      color: #e91e63;
-      margin-bottom: 15px;
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      background-color: #e91e63;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+      color: white;
     }
-
-    p {
-      font-size: 16px;
-      margin-bottom: 30px;
+    h2 { font-size: 24px; color: #e91e63; margin-bottom: 15px; }
+    .order-number { font-size: 14px; color: #888; margin-bottom: 20px; }
+    p { font-size: 16px; margin-bottom: 30px; }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-
     .btn {
       display: inline-block;
       padding: 12px 24px;
@@ -74,40 +76,31 @@
       font-weight: bold;
       transition: background-color 0.3s;
     }
-
-    .btn:hover {
-      background-color: #c2185b;
+    .btn:hover { background-color: #c2185b; }
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #e91e63;
+      color: #e91e63;
     }
-
+    .btn-outline:hover { background-color: #e91e63; color: white; }
     footer {
       text-align: center;
       padding: 20px;
       background-color: #fafafa;
       font-size: 14px;
       border-top: 1px solid #ddd;
-      margin-top: 60px;
+      margin-top: auto;
     }
-
     @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        margin-top: 10px;
-      }
-
-      main {
-        margin: 30px 20px;
-        padding: 40px 15px;
-      }
+      header { flex-direction: column; align-items: flex-start; }
+      nav { margin-top: 10px; }
+      main { margin: 30px 20px; padding: 40px 15px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Çiçekli İç Giyim</h1>
+    <h1>Atilla Çiçekli İç Giyim</h1>
     <nav>
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
       <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
@@ -116,15 +109,24 @@
   </header>
 
   <main>
+    <div class="success-icon">✓</div>
     <h2>Siparişiniz Başarıyla Alındı!</h2>
-    <p>Çiçekli İç Giyim’i tercih ettiğiniz için teşekkür ederiz.</p>
-    <a href="/cicekli-ic-giyim/index.html" class="btn">Anasayfaya Dön</a>
+    <p class="order-number">Sipariş No: <strong id="orderNumber">#000000</strong></p>
+    <p>Atilla Çiçekli İç Giyim'i tercih ettiğiniz için teşekkür ederiz.<br>Siparişiniz en kısa sürede hazırlanacaktır.</p>
+    <div class="btn-group">
+      <a href="/cicekli-ic-giyim/index.html" class="btn">Anasayfaya Dön</a>
+      <a href="/cicekli-ic-giyim/products.html" class="btn btn-outline">Alışverişe Devam Et</a>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Çiçekli İç Giyim</p>
+    <p>&copy; 2025 Atilla Çiçekli İç Giyim</p>
   </footer>
 
-  <script src="/js/success.js"></script>
+  <script src="/cicekli-ic-giyim/js/success.js"></script>
+  <script>
+    const orderNum = localStorage.getItem('lastOrderNumber') || Math.floor(Math.random() * 900000 + 100000);
+    document.getElementById('orderNumber').textContent = '#' + orderNum;
+  </script>
 </body>
 </html>

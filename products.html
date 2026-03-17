@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ürünler - Çiçekli İç Giyim</title>
-  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css" />
+  <title>Ürünler | Atilla Çiçekli İç Giyim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cicekli-ic-giyim/style.css" />
 </head>
 <body>
   <header>
-    <h1>Çiçekli İç Giyim</h1>
+    <h1>Atilla Çiçekli İç Giyim</h1>
     <nav>
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
       <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
@@ -23,25 +23,36 @@
   </header>
 
   <main>
-    <section id="filters">
-      <input type="text" id="searchInput" placeholder="Ürün ara..." />
-      <select id="sortOptions">
-        <option value="default">Sırala</option>
-        <option value="priceAsc">Fiyata göre artan</option>
-        <option value="priceDesc">Fiyata göre azalan</option>
-      </select>
-    </section>
+    <section class="products">
+      <h2 class="section-title">Ürünlerimiz</h2>
 
-    <section id="productsContainer">
-      <!-- Ürünler burada dinamik olarak listelenecek -->
+      <section id="filters" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
+        <input type="text" id="searchInput" placeholder="Ürün ara..." style="max-width: 250px;" />
+        <select id="categoryFilter">
+          <option value="all">Tüm Kategoriler</option>
+          <option value="sutyen">Sütyen</option>
+          <option value="kilot">Külot</option>
+          <option value="takim">Takım</option>
+          <option value="gecelik">Gecelik</option>
+        </select>
+        <select id="sortOptions">
+          <option value="default">Sırala</option>
+          <option value="priceAsc">Fiyata göre artan</option>
+          <option value="priceDesc">Fiyata göre azalan</option>
+        </select>
+      </section>
+
+      <section id="productsContainer" class="product-grid">
+        <!-- Ürünler burada dinamik olarak listelenecek -->
+      </section>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Çiçekli İç Giyim. Tüm hakları saklıdır.</p>
+    <p>&copy; 2025 Atilla Çiçekli İç Giyim. Tüm hakları saklıdır.</p>
   </footer>
 
-  <script src="js/products.js" defer></script>
-  <script src="js/session.js" defer></script>
+  <script src="/cicekli-ic-giyim/js/products.js" defer></script>
+  <script src="/cicekli-ic-giyim/js/session.js" defer></script>
 </body>
 </html>

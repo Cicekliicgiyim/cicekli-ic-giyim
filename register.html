@@ -2,15 +2,11 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Kayıt Ol | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kayıt Ol | Atilla Çiçekli İç Giyim</title>
 
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- CSS Dosyaları -->
   <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
-  <link rel="stylesheet" href="/cicekli-ic-giyim/form.css">
 
   <style>
     body {
@@ -40,14 +36,20 @@
       font-weight: 600;
     }
 
-    .form-container input,
-    .form-container select {
+    .form-container input {
       width: 100%;
       padding: 12px 14px;
       margin-bottom: 16px;
       border: 1px solid #ccc;
       border-radius: 10px;
       font-size: 15px;
+      font-family: 'Montserrat', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .form-container input:focus {
+      outline: none;
+      border-color: #e91e63;
     }
 
     .form-container button {
@@ -59,17 +61,46 @@
       border-radius: 10px;
       font-size: 16px;
       font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-bottom: 16px;
     }
 
     .form-container button:hover {
       background-color: #c2185b;
     }
 
+    .form-container button.secondary {
+      background-color: transparent;
+      color: #e91e63;
+      border: 2px solid #e91e63;
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    .form-container button.secondary:hover {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    #verificationGroup {
+      display: none;
+    }
+
+    #formMessage {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 12px;
+      min-height: 20px;
+    }
+
+    #formMessage.success { color: #2e7d32; }
+    #formMessage.error   { color: #c62828; }
+
     .form-container p {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 5px;
       font-size: 14px;
     }
 
@@ -82,11 +113,6 @@
     .form-container a:hover {
       text-decoration: underline;
     }
-
-    /* Doğrulama kodu butonu için ekstra boşluk */
-    #sendCodeBtn {
-      margin-bottom: 16px;
-    }
   </style>
 </head>
 <body>
@@ -96,20 +122,37 @@
     <form id="registerForm">
       <input type="text" id="username" placeholder="Kullanıcı Adı" required>
       <input type="email" id="email" placeholder="E-posta" required>
-
-      <!-- Doğrulama kodu gönderme butonu -->
-      <button type="button" id="sendCodeBtn">📩 Kodu Gönder</button>
-
-      <input type="text" id="phone" placeholder="Telefon Numarası (05xx...)" required>
+      <input type="tel" id="phone" placeholder="Telefon Numarası (05xx...)" required>
       <input type="password" id="password" placeholder="Şifre" required>
-      <select id="role">
-        <option value="user">Kullanıcı</option>
-      </select>
+
+      <button type="button" id="sendCodeBtn" class="secondary">📩 Doğrulama Kodunu Gönder</button>
+
+      <div id="verificationGroup">
+        <input type="text" id="verificationCode" placeholder="Doğrulama Kodu" maxlength="6">
+      </div>
+
+      <div id="formMessage"></div>
+
       <button type="submit">Kayıt Ol</button>
     </form>
     <p>Zaten bir hesabınız var mı? <a href="/cicekli-ic-giyim/login.html">Giriş Yap</a></p>
   </div>
 
   <script src="/cicekli-ic-giyim/js/register.js"></script>
+  <script>
+    // Doğrulama kodu gönderilince input alanını göster
+    document.getElementById('sendCodeBtn').addEventListener('click', function () {
+      const email = document.getElementById('email').value;
+      const msg = document.getElementById('formMessage');
+      if (!email) {
+        msg.textContent = 'Lütfen önce e-posta adresinizi girin.';
+        msg.className = 'error';
+        return;
+      }
+      document.getElementById('verificationGroup').style.display = 'block';
+      msg.textContent = 'Doğrulama kodu ' + email + ' adresine gönderildi.';
+      msg.className = 'success';
+    });
+  </script>
 </body>
 </html>

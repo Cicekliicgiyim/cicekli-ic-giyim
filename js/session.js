@@ -1,29 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const userInfo = document.getElementById("user-info");
-  const greeting = document.getElementById("greeting");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const loginBtn = document.getElementById("loginBtn");
+  const greeting    = document.getElementById("greeting");
+  const logoutBtn   = document.getElementById("logoutBtn");
+  const loginBtn    = document.getElementById("loginBtn");
   const registerBtn = document.getElementById("registerBtn");
+  const adminLink   = document.getElementById("adminLink");
+  const userInfo    = document.getElementById("user-info");
 
-  const currentUser = JSON.parse(localStorage.getItem("sessionUser"));
+  const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
   if (currentUser) {
-    if (userInfo) userInfo.textContent = `${currentUser.name} (Giriş Yapıldı)`;
-    if (greeting) greeting.textContent = `Hoş geldin, ${currentUser.name}`;
-    if (logoutBtn) logoutBtn.style.display = "inline-block";
-    if (loginBtn) loginBtn.style.display = "none";
-    if (registerBtn) registerBtn.style.display = "none";
+    const displayName = currentUser.username || currentUser.email || "Kullanıcı";
+    if (userInfo)    userInfo.textContent         = `${displayName} (Giriş Yapıldı)`;
+    if (greeting)    greeting.textContent         = `Hoş geldin, ${displayName}`;
+    if (logoutBtn)   logoutBtn.style.display      = "inline-block";
+    if (loginBtn)    loginBtn.style.display       = "none";
+    if (registerBtn) registerBtn.style.display    = "none";
+    if (adminLink)   adminLink.style.display      = currentUser.role === "admin" ? "inline-block" : "none";
   } else {
-    if (userInfo) userInfo.textContent = "";
-    if (greeting) greeting.textContent = "";
-    if (logoutBtn) logoutBtn.style.display = "none";
-    if (loginBtn) loginBtn.style.display = "inline-block";
-    if (registerBtn) registerBtn.style.display = "inline-block";
+    if (userInfo)    userInfo.textContent         = "";
+    if (greeting)    greeting.textContent         = "";
+    if (logoutBtn)   logoutBtn.style.display      = "none";
+    if (loginBtn)    loginBtn.style.display       = "inline-block";
+    if (registerBtn) registerBtn.style.display    = "inline-block";
+    if (adminLink)   adminLink.style.display      = "none";
   }
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("sessionUser");
+      sessionStorage.removeItem("loggedInUser");
       window.location.href = "/cicekli-ic-giyim/index.html";
     });
   }
@@ -40,15 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Giriş gerektiren sayfalar (data-require-login)
   const requireLogin = document.body.getAttribute("data-require-login");
   if (requireLogin !== null && !currentUser) {
     window.location.href =
       "/cicekli-ic-giyim/login.html?redirectTo=" + encodeURIComponent(window.location.pathname);
+    return;
   }
 
+  // Admin gerektiren sayfalar (data-require-admin)
   const requireAdmin = document.body.getAttribute("data-require-admin");
   if (requireAdmin !== null && (!currentUser || currentUser.role !== "admin")) {
-    alert("Bu sayfaya yalnızca yöneticiler erişebilir.");
     window.location.href = "/cicekli-ic-giyim/login.html";
+    return;
   }
 });

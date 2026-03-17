@@ -2,16 +2,233 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Sepetim | Çiçekli İç Giyim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sepetim | Atilla Çiçekli İç Giyim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
-  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
-  <script src="/js/session.js" defer></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    header h1 { color: #e91e63; font-size: 24px; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: #e91e63; }
+
+    nav button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+      transition: background-color 0.3s;
+    }
+
+    nav button:hover { background-color: #c2185b; }
+    #greeting { font-weight: bold; color: #e91e63; }
+
+    main {
+      flex: 1;
+      max-width: 800px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    main h2 {
+      color: #e91e63;
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+
+    #cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .cart-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .cart-item img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-info h3 {
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-info .price {
+      color: #e91e63;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cart-item-actions button {
+      background: #f4f4f4;
+      color: #333;
+      border: 1px solid #ddd;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      transition: background-color 0.2s;
+      padding: 0;
+    }
+
+    .cart-item-actions button:hover { background-color: #f8bbd0; }
+
+    .cart-item-actions .qty {
+      font-size: 15px;
+      font-weight: 600;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .cart-item-actions .remove-btn {
+      background: transparent;
+      color: #e91e63;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    #cart-summary {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    #cart-summary span:last-child { color: #e91e63; }
+
+    .cart-empty {
+      text-align: center;
+      color: #aaa;
+      font-size: 15px;
+      padding: 60px 0;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      background-color: #e91e63;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover { background-color: #c2185b; }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #e91e63;
+      color: #e91e63;
+    }
+
+    .btn-outline:hover {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e0e0e0;
+      font-size: 14px;
+      color: #666;
+      border-top: 1px solid #ccc;
+      margin-top: auto;
+    }
+
+    @media (max-width: 600px) {
+      header { flex-direction: column; align-items: flex-start; }
+      nav { margin-top: 10px; }
+      .cart-item { flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body data-require-login>
   <header>
     <div class="logo">
-      <h1>Çiçekli İç Giyim</h1>
+      <h1>Atilla Çiçekli İç Giyim</h1>
     </div>
     <nav>
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
@@ -27,28 +244,37 @@
 
   <main>
     <h2>Sepetim</h2>
-    <div id="cart-items"></div>
-    <div id="cart-summary"></div>
-    <a href="/cicekli-ic-giyim/checkout.html" class="btn">Ödemeye Geç</a>
+    <div id="cart-items">
+      <div class="cart-empty">Sepetiniz boş.</div>
+    </div>
+    <div id="cart-summary" style="display:none;">
+      <span>Toplam</span>
+      <span id="cart-total">₺0,00</span>
+    </div>
+    <div class="btn-group">
+      <a href="/cicekli-ic-giyim/checkout.html" class="btn" id="checkoutBtn">Ödemeye Geç</a>
+      <a href="/cicekli-ic-giyim/products.html" class="btn btn-outline">Alışverişe Devam Et</a>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Çiçekli İç Giyim</p>
+    <p>&copy; 2025 Atilla Çiçekli İç Giyim</p>
   </footer>
 
-  <script src="/js/cart.js"></script>
+  <script src="/cicekli-ic-giyim/js/session.js" defer></script>
+  <script src="/cicekli-ic-giyim/js/cart.js"></script>
   <script>
-    const sessionUser = JSON.parse(localStorage.getItem("sessionUser"));
+    const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
-    if (sessionUser) {
-      document.getElementById("greeting").innerText = `Hoş geldin, ${sessionUser.name}`;
+    if (currentUser) {
+      document.getElementById("greeting").textContent = `Hoş geldin, ${currentUser.username || currentUser.email}`;
       document.getElementById("logoutBtn").style.display = "inline-block";
-      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("loginBtn").style.display  = "none";
       document.getElementById("registerBtn").style.display = "none";
     } else {
-      document.getElementById("greeting").innerText = "";
-      document.getElementById("logoutBtn").style.display = "none";
-      document.getElementById("loginBtn").style.display = "inline-block";
+      document.getElementById("greeting").textContent = "";
+      document.getElementById("logoutBtn").style.display  = "none";
+      document.getElementById("loginBtn").style.display   = "inline-block";
       document.getElementById("registerBtn").style.display = "inline-block";
     }
 
@@ -61,7 +287,7 @@
     });
 
     document.getElementById("logoutBtn").addEventListener("click", () => {
-      localStorage.removeItem("sessionUser");
+      sessionStorage.removeItem("loggedInUser");
       location.reload();
     });
   </script>

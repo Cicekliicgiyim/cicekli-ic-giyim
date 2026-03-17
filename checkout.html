@@ -1,23 +1,219 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Çiçekli İç Giyim | Ödeme</title>
-  <link rel="stylesheet" href="/cicekli-ic-giyim/checkout.css" />
-  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css" />
-  <link rel="stylesheet" href="/cicekli-ic-giyim/checkout.css" />
-  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css" />
-  <script src="/js/session.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ödeme | Atilla Çiçekli İç Giyim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
   <style>
-    /* (CSS kodların birebir bırakıldı) */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    header h1 { color: #e91e63; font-size: 24px; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: #e91e63; }
+
+    nav button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+      transition: background-color 0.3s;
+    }
+
+    nav button:hover { background-color: #c2185b; }
+    #greeting { font-weight: bold; color: #e91e63; }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .checkout-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .checkout-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    .checkout-title {
+      color: #e91e63;
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .section-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #e91e63;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 20px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #fce4ec;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 5px;
+      margin-top: 12px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+      transition: border-color 0.3s;
+      background-color: #fff;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #e91e63;
+    }
+
+    textarea { resize: vertical; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 25px;
+    }
+
+    .submit-btn:hover { background-color: #c2185b; }
+
+    /* Sipariş Özeti */
+    .order-summary {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    .order-summary h3 {
+      color: #e91e63;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    #summaryItems {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    #summaryItems li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f4f4f4;
+      color: #555;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      padding-top: 12px;
+      border-top: 2px solid #f4f4f4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e0e0e0;
+      font-size: 14px;
+      color: #666;
+      border-top: 1px solid #ccc;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .checkout-wrapper { grid-template-columns: 1fr; }
+      .row, .card-row { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; }
+      nav { margin-top: 10px; }
+    }
   </style>
 </head>
 <body data-require-login>
   <header>
     <div class="logo">
-      <h1>Çiçekli İç Giyim</h1>
+      <h1>Atilla Çiçekli İç Giyim</h1>
     </div>
     <nav>
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
@@ -32,47 +228,132 @@
   </header>
 
   <main>
-    <div class="checkout-container">
-      <h2 class="checkout-title">Ödeme Bilgileri</h2>
-      <form class="checkout-form" action="/cicekli-ic-giyim/order-success.html" method="post">
-        <label>Ad Soyad</label>
-        <input type="text" name="fullname" placeholder="Ad Soyad" required />
+    <div class="checkout-wrapper">
 
-        <label>E-posta</label>
-        <input type="email" name="email" placeholder="E-posta" required />
+      <!-- Sol: Form -->
+      <div class="checkout-container">
+        <h2 class="checkout-title">Ödeme Bilgileri</h2>
+        <form class="checkout-form" id="checkoutForm">
 
-        <label>Telefon</label>
-        <input type="tel" name="phone" placeholder="Telefon Numarası (05xx xxx xx xx)" required />
+          <div class="section-label">Kişisel Bilgiler</div>
 
-        <div class="row">
-          <div>
-            <label>İl</label>
-            <input type="text" name="city" placeholder="İl" required />
+          <label>Ad Soyad</label>
+          <input type="text" name="fullname" placeholder="Ad Soyad" required>
+
+          <label>E-posta</label>
+          <input type="email" name="email" placeholder="E-posta" required>
+
+          <label>Telefon</label>
+          <input type="tel" name="phone" placeholder="05xx xxx xx xx" required>
+
+          <div class="section-label">Teslimat Adresi</div>
+
+          <div class="row">
+            <div>
+              <label>İl</label>
+              <input type="text" name="city" placeholder="İl" required>
+            </div>
+            <div>
+              <label>İlçe</label>
+              <input type="text" name="district" placeholder="İlçe" required>
+            </div>
           </div>
-          <div>
-            <label>İlçe</label>
-            <input type="text" name="district" placeholder="İlçe" required />
+
+          <label>Adres</label>
+          <textarea name="address" rows="3" placeholder="Teslimat Adresi" required></textarea>
+
+          <label>Kargo Firması</label>
+          <select name="shipping" required>
+            <option value="">Kargo Firması Seçiniz</option>
+            <option value="Yurtiçi">Yurtiçi Kargo</option>
+            <option value="Aras">Aras Kargo</option>
+            <option value="MNG">MNG Kargo</option>
+            <option value="PTT">PTT Kargo</option>
+          </select>
+
+          <div class="section-label">Kart Bilgileri</div>
+
+          <label>Kart Üzerindeki İsim</label>
+          <input type="text" name="cardName" placeholder="Ad Soyad" required>
+
+          <label>Kart Numarası</label>
+          <input type="text" name="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" required>
+
+          <div class="card-row">
+            <div>
+              <label>Son Kullanma Tarihi</label>
+              <input type="text" name="cardExpiry" placeholder="AA/YY" maxlength="5" required>
+            </div>
+            <div>
+              <label>CVV</label>
+              <input type="text" name="cardCvv" placeholder="000" maxlength="3" required>
+            </div>
           </div>
+
+          <button type="submit" class="submit-btn">🛍️ Siparişi Onayla</button>
+        </form>
+      </div>
+
+      <!-- Sağ: Sipariş Özeti -->
+      <div class="order-summary">
+        <h3>Sipariş Özeti</h3>
+        <ul id="summaryItems">
+          <li><span>Ürünler yükleniyor...</span></li>
+        </ul>
+        <div class="summary-total">
+          <span>Toplam</span>
+          <span id="summaryTotal">₺0,00</span>
         </div>
+      </div>
 
-        <label>Teslimat Adresi</label>
-        <textarea name="address" rows="3" placeholder="Teslimat Adresi" required></textarea>
-
-        <label>Kargo Firması</label>
-        <select name="shipping" required>
-          <option value="">Kargo Firması Seçiniz</option>
-          <option value="Yurtiçi">Yurtiçi</option>
-          <option value="Aras">Aras</option>
-          <option value="MNG">MNG</option>
-        </select>
-
-        <button type="submit">Siparişi Onayla</button>
-      </form>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Çiçekli İç Giyim</p>
+    <p>&copy; 2025 Atilla Çiçekli İç Giyim</p>
   </footer>
+
+  <script src="/cicekli-ic-giyim/js/session.js" defer></script>
+  <script src="/cicekli-ic-giyim/js/checkout.js"></script>
+  <script>
+    // Kart numarası formatı: 0000 0000 0000 0000
+    document.querySelector('[name="cardNumber"]').addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
+    });
+
+    // Son kullanma tarihi formatı: AA/YY
+    document.querySelector('[name="cardExpiry"]').addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/, '$1/$2').slice(0, 5);
+    });
+
+    // Sipariş özeti — sepet localStorage'dan okunur
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const summaryItems = document.getElementById('summaryItems');
+    const summaryTotal = document.getElementById('summaryTotal');
+
+    if (cart.length === 0) {
+      summaryItems.innerHTML = '<li><span>Sepetiniz boş.</span></li>';
+    } else {
+      let total = 0;
+      summaryItems.innerHTML = '';
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        const itemTotal = item.price * (item.quantity || 1);
+        total += itemTotal;
+        li.innerHTML = `<span>${item.name} x${item.quantity || 1}</span><span>₺${itemTotal.toFixed(2)}</span>`;
+        summaryItems.appendChild(li);
+      });
+      summaryTotal.textContent = '₺' + total.toFixed(2);
+    }
+
+    // Form gönderimi
+    document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const orderNum = Math.floor(Math.random() * 900000 + 100000);
+      localStorage.setItem('lastOrderNumber', orderNum);
+      localStorage.removeItem('cart');
+      window.location.href = '/cicekli-ic-giyim/order-success.html';
+    });
+  </script>
 </body>
 </html>

@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 /* Genel Stil */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -26,7 +32,7 @@ header {
 
 .logo h1, header h1 {
   font-size: 26px;
-  color: #b71c5a;
+  color: #e91e63;
   font-weight: 600;
 }
 
@@ -38,35 +44,39 @@ nav {
   flex-wrap: wrap;
 }
 
-nav a, nav button {
+nav a {
   padding: 8px 12px;
   border-radius: 4px;
-  background-color: transparent;
-  border: none;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   color: #444;
-  transition: 0.3s;
+  transition: color 0.3s;
 }
 
 nav a:hover {
-  color: #b71c5a;
+  color: #e91e63;
 }
 
 nav button {
-  background-color: #b71c5a;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: #e91e63;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
   color: white;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 nav button:hover {
-  background-color: #8e1247;
+  background-color: #c2185b;
 }
 
 #greeting {
   font-weight: bold;
-  color: #b71c5a;
+  color: #e91e63;
 }
 
 /* Hero */
@@ -79,7 +89,7 @@ nav button:hover {
 .hero h2 {
   font-size: 36px;
   margin-bottom: 15px;
-  color: #b71c5a;
+  color: #e91e63;
 }
 
 .hero p {
@@ -88,21 +98,22 @@ nav button:hover {
 }
 
 /* Butonlar */
-.btn, button {
-  background-color: #b71c5a;
+.btn {
+  display: inline-block;
+  background-color: #e91e63;
   color: white;
   padding: 12px 24px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
   font-size: 16px;
-  transition: 0.3s;
+  transition: background-color 0.3s;
   border: none;
   cursor: pointer;
 }
 
-.btn:hover, button:hover {
-  background-color: #8e1247;
+.btn:hover {
+  background-color: #c2185b;
 }
 
 /* Footer */
@@ -123,7 +134,7 @@ footer {
 .section-title {
   text-align: center;
   font-size: 2rem;
-  color: #b71c5a;
+  color: #e91e63;
   margin-bottom: 40px;
 }
 
@@ -161,7 +172,7 @@ footer {
 }
 
 .product-card .price {
-  color: #b71c5a;
+  color: #e91e63;
   font-weight: bold;
   margin-bottom: 15px;
 }
@@ -186,6 +197,23 @@ select {
   color: #333;
 }
 
+/* Checkout Butonu */
+.checkout-btn {
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  padding: 14px 28px;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05);
+  background-color: #c2185b;
+}
+
 /* Mobil */
 @media screen and (max-width: 600px) {
   nav {
@@ -204,18 +232,4 @@ select {
   .hero p {
     font-size: 16px;
   }
-}
-.checkout-btn {
-  border-radius: 30px;
-  box-shadow: 0 4px 12px rgba(183, 28, 90, 0.3);
-  font-size: 17px;
-  letter-spacing: 0.5px;
-  padding: 14px 28px;
-  display: inline-block;
-  transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-.checkout-btn:hover {
-  transform: scale(1.05);
-  background-color: #a1164d;
 }

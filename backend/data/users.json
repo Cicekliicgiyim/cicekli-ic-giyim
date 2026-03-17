@@ -1,10 +1,16 @@
 [
-    {
-      "name": "Admin",
-      "email": "admin@admin.com",
-      "password": "1234",
-      "role": "admin",
-      "phone": "05551112233"
-    }
-  ]
-  
+  {
+    "username": "Admin",
+    "email": "admin@atilla.com",
+    "password": "admin123",
+    "role": "admin",
+    "phone": "05551112233"
+  },
+  {
+    "username": "test_kullanici",
+    "email": "test@atilla.com",
+    "password": "test123",
+    "role": "user",
+    "phone": "05001234567"
+  }
+]

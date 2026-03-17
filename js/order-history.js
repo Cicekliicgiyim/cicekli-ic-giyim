@@ -1,39 +1,83 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const orderHistoryContainer = document.getElementById("order-history");
+  const container = document.getElementById("order-history");
+  if (!container) return;
 
-  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+
   if (!currentUser) {
-    orderHistoryContainer.innerHTML = "<p>Lütfen sipariş geçmişinizi görüntülemek için giriş yapın.</p>";
+    container.innerHTML = `
+      <div class="empty-message">
+        Sipariş geçmişinizi görüntülemek için
+        <a href="/cicekli-ic-giyim/login.html" style="color:#e91e63;">giriş yapın</a>.
+      </div>`;
     return;
   }
 
-  const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {};
-  const userOrders = orderHistory[currentUser.email] || [];
+  const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "{}");
+  const userOrders   = orderHistory[currentUser.email] || [];
 
   if (userOrders.length === 0) {
-    orderHistoryContainer.innerHTML = "<p>Henüz hiç siparişiniz yok.</p>";
+    container.innerHTML = `
+      <div class="empty-message">
+        Henüz hiç siparişiniz yok.
+        <br><br>
+        <a href="/cicekli-ic-giyim/products.html" style="color:#e91e63; font-weight:600;">
+          Alışverişe Başla →
+        </a>
+      </div>`;
     return;
   }
 
-  userOrders.forEach((order, index) => {
-    const orderElement = document.createElement("div");
-    orderElement.classList.add("order");
+  // En yeni sipariş üstte görünsün
+  const sorted = [...userOrders].reverse();
 
-    orderElement.innerHTML = `
-      <h3>Sipariş #${index + 1}</h3>
-      <ul>
-        ${order.items
-          .map(
-            (item) => `
-              <li>${item.title} - 1 adet - ₺${item.price}</li>
-            `
-          )
-          .join("")}
+  sorted.forEach((order, index) => {
+    const el = document.createElement("div");
+    el.className = "order";
+
+    const date = order.date
+      ? new Date(order.date).toLocaleDateString("tr-TR", {
+          day: "2-digit", month: "long", year: "numeric",
+          hour: "2-digit", minute: "2-digit"
+        })
+      : "Bilinmiyor";
+
+    const orderNum = order.orderNumber || (sorted.length - index);
+    const total    = parseFloat(order.total || 0).toFixed(2);
+    const status   = order.status || "Hazırlanıyor";
+
+    const statusColor = {
+      "Teslim Edildi" : "#2e7d32",
+      "Kargoda"       : "#e65100",
+      "Hazırlanıyor"  : "#1565c0",
+      "İptal Edildi"  : "#c62828",
+    }[status] || "#1565c0";
+
+    const itemsHTML = (order.items || []).map(item => `
+      <li style="display:flex; justify-content:space-between; padding:6px 0;
+                 border-bottom:1px solid #f9f9f9; font-size:14px; color:#555;">
+        <span>${item.title} × ${item.quantity || 1}</span>
+        <span style="font-weight:600;">₺${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</span>
+      </li>
+    `).join("");
+
+    el.innerHTML = `
+      <div class="order-header">
+        <span class="order-number">Sipariş #${orderNum}</span>
+        <span class="order-date">${date}</span>
+        <span class="order-status" style="background:${statusColor}20; color:${statusColor};">
+          ${status}
+        </span>
+      </div>
+      <ul style="list-style:none; padding:0; margin:10px 0;">
+        ${itemsHTML}
       </ul>
-      <strong>Toplam: ₺${order.total}</strong>
-      <p>Tarih: ${order.date || "Bilinmiyor"}</p>
+      <div class="order-total">
+        <span>Toplam</span>
+        <span>₺${total}</span>
+      </div>
     `;
 
-    orderHistoryContainer.appendChild(orderElement);
+    container.appendChild(el);
   });
 });

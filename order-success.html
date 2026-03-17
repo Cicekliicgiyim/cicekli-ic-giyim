@@ -2,8 +2,9 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Sipariş Onayı - Çiçekli İç Giyim</title>
-  <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sipariş Onayı | Atilla Çiçekli İç Giyim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
   <style>
     body {
@@ -57,15 +58,41 @@
       text-align: center;
     }
 
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      background-color: #e91e63;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+      color: white;
+    }
+
     h2 {
       color: #e91e63;
       font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .order-number {
+      font-size: 14px;
+      color: #888;
       margin-bottom: 20px;
     }
 
     p {
       font-size: 16px;
       margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .btn {
@@ -78,10 +105,23 @@
       font-size: 16px;
       font-weight: bold;
       transition: background-color 0.3s;
+      border: none;
+      cursor: pointer;
     }
 
     .btn:hover {
       background-color: #c2185b;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #e91e63;
+      color: #e91e63;
+    }
+
+    .btn-outline:hover {
+      background-color: #e91e63;
+      color: white;
     }
 
     footer {
@@ -112,7 +152,7 @@
 </head>
 <body data-require-login>
   <header>
-    <h1>Çiçekli İç Giyim</h1>
+    <h1>Atilla Çiçekli İç Giyim</h1>
     <nav>
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
       <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
@@ -124,16 +164,25 @@
   </header>
 
   <main>
+    <div class="success-icon">✓</div>
     <h2>Sipariş Onaylandı!</h2>
-    <p>Sipariş bilgileriniz başarıyla alınmıştır. Sipariş özetiniz e-posta adresinize gönderilmiştir.</p>
-    <a href="/cicekli-ic-giyim/success.html" class="btn">Devam Et</a>
+    <p class="order-number">Sipariş No: <strong id="orderNumber">#000000</strong></p>
+    <p>Sipariş bilgileriniz başarıyla alınmıştır.<br>Sipariş özetiniz e-posta adresinize gönderilmiştir.</p>
+    <div class="btn-group">
+      <a href="/cicekli-ic-giyim/success.html" class="btn">Devam Et</a>
+      <a href="/cicekli-ic-giyim/history.html" class="btn btn-outline">Sipariş Geçmişi</a>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Çiçekli İç Giyim</p>
+    <p>&copy; 2025 Atilla Çiçekli İç Giyim</p>
   </footer>
 
-  <script src="/js/order-success.js"></script>
-  <script src="/js/session.js" defer></script>
+  <script src="/cicekli-ic-giyim/js/order-success.js"></script>
+  <script src="/cicekli-ic-giyim/js/session.js" defer></script>
+  <script>
+    const orderNum = localStorage.getItem('lastOrderNumber') || Math.floor(Math.random() * 900000 + 100000);
+    document.getElementById('orderNumber').textContent = '#' + orderNum;
+  </script>
 </body>
 </html>

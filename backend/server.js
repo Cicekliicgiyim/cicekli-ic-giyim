@@ -1,122 +1,184 @@
-const express = require("express");
-const fs = require("fs");
-const cors = require("cors");
+const express    = require("express");
+const fs         = require("fs");
+const path       = require("path");
+const cors       = require("cors");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
-const crypto = require("crypto");
+const crypto     = require("crypto");
+const bcrypt     = require("bcrypt");
 
-const app = express();
+const app  = express();
 const PORT = 3000;
+const SALT_ROUNDS = 10;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-// Kullanıcı verilerini okuma/yazma fonksiyonları
-const readJSON = (filename) => {
-  try {
-    return JSON.parse(fs.readFileSync(filename, "utf8"));
-  } catch (err) {
-    return [];
+// data/ klasörünü otomatik oluştur
+const DATA_DIR   = path.join(__dirname, "data");
+const USERS_FILE = path.join(DATA_DIR, "users.json");
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
+if (!fs.existsSync(USERS_FILE)) fs.writeFileSync(USERS_FILE, "[]");
+
+// Yardımcı fonksiyonlar
+const readUsers  = () => {
+  try { return JSON.parse(fs.readFileSync(USERS_FILE, "utf8")); }
+  catch { return []; }
+};
+
+const writeUsers = (data) => {
+  fs.writeFileSync(USERS_FILE, JSON.stringify(data, null, 2), "utf8");
+};
+
+// Kod deposu: { email: { code, expiresAt } }
+const resetCodes = {};
+
+// E-posta gönderici
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.MAIL_USER || "seninmailin@gmail.com",
+    pass: process.env.MAIL_PASS || "uygulama-sifresi"
   }
-};
+});
 
-const writeJSON = (filename, data) => {
-  fs.writeFileSync(filename, JSON.stringify(data, null, 2), "utf8");
-};
+// ─── KAYIT ────────────────────────────────────────────────
+app.post("/register", async (req, res) => {
+  const { username, email, password, phone } = req.body;
 
-// Kayıt
-app.post("/register", (req, res) => {
-  const { name, email, password } = req.body;
-  const users = readJSON("data/users.json");
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: "Tüm alanlar zorunludur." });
+  }
 
+  const users = readUsers();
   if (users.some(u => u.email === email)) {
     return res.status(400).json({ message: "Bu e-posta zaten kayıtlı." });
   }
 
-  users.push({ name, email, password });
-  writeJSON("data/users.json", users);
+  const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+  users.push({ username, email, password: hashedPassword, phone: phone || "", role: "user" });
+  writeUsers(users);
 
-  res.json({ message: "Kayıt başarılı!" });
+  res.json({ success: true, message: "Kayıt başarılı!" });
 });
 
-// Giriş
-app.post("/login", (req, res) => {
+// ─── GİRİŞ ────────────────────────────────────────────────
+app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  const users = readJSON("data/users.json");
 
-  const user = users.find(u => u.email === email && u.password === password);
+  if (!email || !password) {
+    return res.status(400).json({ message: "E-posta ve şifre zorunludur." });
+  }
+
+  const users = readUsers();
+  const user  = users.find(u => u.email === email);
+
   if (!user) {
     return res.status(401).json({ message: "E-posta veya şifre yanlış." });
   }
 
-  res.json({ message: "Giriş başarılı!", user });
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.status(401).json({ message: "E-posta veya şifre yanlış." });
+  }
+
+  // Şifreyi response'a ekleme
+  const { password: _, ...safeUser } = user;
+  res.json({ success: true, message: "Giriş başarılı!", user: safeUser });
 });
 
-// Doğrulama kodlarını geçici olarak tut
-let resetCodes = {};
-
-// Kod gönderme (şifre sıfırlama için)
+// ─── KOD GÖNDER (şifre sıfırlama) ─────────────────────────
 app.post("/api/send-reset-code", (req, res) => {
   const { email, phone } = req.body;
-  const users = readJSON("data/users.json");
 
-  const user = users.find(u => u.email === email && u.phone === phone);
+  if (!email || !phone) {
+    return res.status(400).json({ message: "E-posta ve telefon zorunludur." });
+  }
+
+  const users = readUsers();
+  const user  = users.find(u => u.email === email && u.phone === phone);
+
   if (!user) {
     return res.status(400).json({ message: "E-posta veya telefon numarası hatalı." });
   }
 
-  const verificationCode = crypto.randomInt(100000, 999999).toString();
-  resetCodes[email] = verificationCode;
-
-  // E-posta gönderici
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "seninmailin@gmail.com", // kendi mailin
-      pass: "uygulama-sifresi"       // Gmail uygulama şifresi
-    }
-  });
+  const code      = crypto.randomInt(100000, 999999).toString();
+  const expiresAt = Date.now() + 10 * 60 * 1000; // 10 dakika
+  resetCodes[email] = { code, expiresAt };
 
   const mailOptions = {
-    from: "Çiçekli İç Giyim <seninmailin@gmail.com>",
-    to: email,
+    from   : `Atilla Çiçekli İç Giyim <${process.env.MAIL_USER || "seninmailin@gmail.com"}>`,
+    to     : email,
     subject: "Şifre Sıfırlama Kodu",
-    text: `Merhaba, şifre sıfırlama kodunuz: ${verificationCode}`
+    html   : `
+      <div style="font-family:'Montserrat',sans-serif; max-width:480px; margin:0 auto;
+                  padding:30px; border-radius:10px; border:1px solid #f8bbd0;">
+        <h2 style="color:#e91e63;">Şifre Sıfırlama</h2>
+        <p>Merhaba <strong>${user.username}</strong>,</p>
+        <p>Şifre sıfırlama kodunuz:</p>
+        <div style="font-size:32px; font-weight:bold; color:#e91e63;
+                    letter-spacing:8px; text-align:center; padding:20px 0;">
+          ${code}
+        </div>
+        <p style="color:#888; font-size:13px;">Bu kod 10 dakika geçerlidir.</p>
+        <p style="color:#888; font-size:13px;">
+          Bu işlemi siz yapmadıysanız bu e-postayı görmezden gelebilirsiniz.
+        </p>
+      </div>
+    `
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Mail gönderilemedi:", error);
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.error("Mail gönderilemedi:", err);
       return res.status(500).json({ message: "Kod gönderilemedi." });
     }
     console.log("Kod gönderildi:", info.response);
-    res.json({ message: "Kod e-posta adresinize gönderildi." });
+    res.json({ success: true, message: "Kod e-posta adresinize gönderildi." });
   });
 });
 
-// Kod doğrulama ve şifre güncelleme
-app.post("/api/verify-reset-code", (req, res) => {
-  const { email, verificationCode, newPassword } = req.body;
-  const users = readJSON("data/users.json");
+// ─── KOD DOĞRULA VE ŞİFRE GÜNCELLE ───────────────────────
+app.post("/api/verify-reset-code", async (req, res) => {
+  const { email, code, newPassword } = req.body;
 
-  if (resetCodes[email] !== verificationCode) {
+  if (!email || !code || !newPassword) {
+    return res.status(400).json({ message: "Tüm alanlar zorunludur." });
+  }
+
+  const entry = resetCodes[email];
+  if (!entry) {
+    return res.status(400).json({ message: "Kod bulunamadı. Lütfen tekrar gönderin." });
+  }
+
+  if (Date.now() > entry.expiresAt) {
+    delete resetCodes[email];
+    return res.status(400).json({ message: "Kodun süresi dolmuş. Lütfen tekrar gönderin." });
+  }
+
+  if (entry.code !== code) {
     return res.status(400).json({ message: "Doğrulama kodu hatalı." });
   }
 
+  if (newPassword.length < 6) {
+    return res.status(400).json({ message: "Şifre en az 6 karakter olmalıdır." });
+  }
+
+  const users     = readUsers();
   const userIndex = users.findIndex(u => u.email === email);
   if (userIndex === -1) {
     return res.status(404).json({ message: "Kullanıcı bulunamadı." });
   }
 
-  users[userIndex].password = newPassword;
-  writeJSON("data/users.json", users);
+  users[userIndex].password = await bcrypt.hash(newPassword, SALT_ROUNDS);
+  writeUsers(users);
+  delete resetCodes[email];
 
-  delete resetCodes[email]; // kodu temizle
-
-  res.json({ message: "Şifre başarıyla güncellendi." });
+  res.json({ success: true, message: "Şifre başarıyla güncellendi." });
 });
 
+// ─── SUNUCU ────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`Server http://localhost:${PORT} adresinde çalışıyor.`);
+  console.log(`✅ Sunucu http://localhost:${PORT} adresinde çalışıyor.`);
 });
