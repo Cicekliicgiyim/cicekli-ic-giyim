@@ -4,21 +4,176 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ürünler | Atilla Çiçekli İç Giyim</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cicekli-ic-giyim/style.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    body { background-color: #f4f4f4; color: #333; }
+
+    /* ── HEADER ── */
+    header {
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .logo h1 { margin: 0; font-size: 26px; color: #e91e63; font-weight: 600; }
+
+    /* ── NAV ── */
+    nav { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: #555; font-weight: 500; transition: color 0.3s; }
+    nav a:hover { color: #e91e63; }
+    #greeting { font-weight: bold; color: #e91e63; }
+
+    /* ── BUTONLAR ── */
+    #logoutBtn, #loginBtn, #registerBtn {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+      transition: background-color 0.3s;
+    }
+    #logoutBtn:hover, #loginBtn:hover, #registerBtn:hover { background-color: #c2185b; }
+
+    /* ── HAMBURGEr (MOBİL) ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #e91e63;
+      border-radius: 3px;
+    }
+
+    /* ── FİLTRELER ── */
+    #filters {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      padding: 0 20px;
+    }
+    #filters input,
+    #filters select {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #333;
+      background-color: #fff;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    #filters input:focus,
+    #filters select:focus { border-color: #e91e63; }
+    #searchInput { max-width: 250px; width: 100%; }
+
+    /* ── ÜRÜN IZGARASI ── */
+    .products { padding: 40px 20px; }
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      color: #e91e63;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── BOŞ DURUM ── */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #aaa;
+      font-size: 16px;
+      grid-column: 1 / -1;
+    }
+    .empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state p { margin-bottom: 8px; }
+    .empty-state small { font-size: 13px; color: #bbb; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e0e0e0;
+      font-size: 14px;
+      color: #666;
+      border-top: 1px solid #ccc;
+      margin-top: 40px;
+    }
+
+    /* ── MOBİL ── */
+    @media screen and (max-width: 600px) {
+      .hamburger { display: flex; }
+      nav {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 16px 24px;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        z-index: 9;
+      }
+      nav.open { display: flex; }
+      header { flex-wrap: wrap; position: relative; }
+      #filters { flex-direction: column; align-items: center; }
+      #searchInput { max-width: 100%; }
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>Atilla Çiçekli İç Giyim</h1>
-    <nav>
+    <div class="logo">
+      <h1>Atilla Çiçekli İç Giyim</h1>
+    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menüyü aç/kapat">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="mainNav">
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
       <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
       <a href="/cicekli-ic-giyim/cart.html">Sepetim</a>
       <a href="/cicekli-ic-giyim/history.html">Sipariş Geçmişi</a>
+      <!-- Admin linki: sadece admin rolündeki kullanıcıya JS ile gösterilir -->
+      <a href="/cicekli-ic-giyim/admin.html" id="adminLink" style="display:none;">Admin</a>
       <span id="greeting"></span>
       <button id="loginBtn">Giriş Yap</button>
       <button id="registerBtn">Üye Ol</button>
-      <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
+      <button id="logoutBtn" style="display:none;">Çıkış Yap</button>
     </nav>
   </header>
 
@@ -26,33 +181,124 @@
     <section class="products">
       <h2 class="section-title">Ürünlerimiz</h2>
 
-      <section id="filters" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
-        <input type="text" id="searchInput" placeholder="Ürün ara..." style="max-width: 250px;" />
+      <section id="filters">
+        <!-- Arama -->
+        <input type="text" id="searchInput" placeholder="🔍 Ürün ara..." />
+
+        <!-- Kategori — admin.html ile eşleştirildi (Pijama eklendi) -->
         <select id="categoryFilter">
           <option value="all">Tüm Kategoriler</option>
           <option value="sutyen">Sütyen</option>
           <option value="kilot">Külot</option>
           <option value="takim">Takım</option>
           <option value="gecelik">Gecelik</option>
+          <option value="pijama">Pijama</option>
         </select>
+
+        <!-- Beden filtresi -->
+        <select id="sizeFilter">
+          <option value="all">Tüm Bedenler</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
+
+        <!-- Sıralama -->
         <select id="sortOptions">
           <option value="default">Sırala</option>
           <option value="priceAsc">Fiyata göre artan</option>
           <option value="priceDesc">Fiyata göre azalan</option>
+          <option value="nameAsc">İsme göre (A–Z)</option>
         </select>
       </section>
 
+      <!-- Ürünler buraya dinamik olarak eklenir (products.js tarafından) -->
       <section id="productsContainer" class="product-grid">
-        <!-- Ürünler burada dinamik olarak listelenecek -->
+        <!-- Ürün yoksa boş durum gösterilir -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🛍️</div>
+          <p>Henüz ürün bulunmuyor.</p>
+          <small>Filtrelerinizi değiştirmeyi deneyin veya daha sonra tekrar bakın.</small>
+        </div>
       </section>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Atilla Çiçekli İç Giyim. Tüm hakları saklıdır.</p>
+    <p>&copy; <span id="footerYear"></span> Atilla Çiçekli İç Giyim. Tüm hakları saklıdır.</p>
   </footer>
 
   <script src="/cicekli-ic-giyim/js/products.js" defer></script>
   <script src="/cicekli-ic-giyim/js/session.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // ── Dinamik footer yılı ──
+      const yearEl = document.getElementById("footerYear");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // ── Hamburger menü ──
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const mainNav      = document.getElementById("mainNav");
+      if (hamburgerBtn && mainNav) {
+        hamburgerBtn.addEventListener("click", () => {
+          mainNav.classList.toggle("open");
+        });
+      }
+
+      // ── Oturum yönetimi ──
+      const greeting    = document.getElementById("greeting");
+      const logoutBtn   = document.getElementById("logoutBtn");
+      const loginBtn    = document.getElementById("loginBtn");
+      const registerBtn = document.getElementById("registerBtn");
+      const adminLink   = document.getElementById("adminLink");
+
+      const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+      if (currentUser) {
+        if (greeting)    greeting.textContent      = `Hoş geldin, ${currentUser.username || currentUser.email}`;
+        if (logoutBtn)   logoutBtn.style.display   = "inline-block";
+        if (loginBtn)    loginBtn.style.display    = "none";
+        if (registerBtn) registerBtn.style.display = "none";
+        if (adminLink && currentUser.role === "admin") adminLink.style.display = "inline-block";
+      } else {
+        if (greeting)    greeting.textContent      = "";
+        if (logoutBtn)   logoutBtn.style.display   = "none";
+        if (loginBtn)    loginBtn.style.display    = "inline-block";
+        if (registerBtn) registerBtn.style.display = "inline-block";
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          sessionStorage.removeItem("loggedInUser");
+          window.location.reload();
+        });
+      }
+      if (loginBtn) {
+        loginBtn.addEventListener("click", () => {
+          window.location.href = "/cicekli-ic-giyim/login.html";
+        });
+      }
+      if (registerBtn) {
+        registerBtn.addEventListener("click", () => {
+          window.location.href = "/cicekli-ic-giyim/register.html";
+        });
+      }
+
+      // ── Boş durum kontrolü ──
+      // products.js ürünleri yükledikten sonra #emptyState'i gizlemeli.
+      // Eğer products.js yoksa veya ürün gelmezse boş mesaj görünür.
+      const emptyState = document.getElementById("emptyState");
+      const observer = new MutationObserver(() => {
+        const cards = document.querySelectorAll("#productsContainer .product-card");
+        if (emptyState) emptyState.style.display = cards.length > 0 ? "none" : "block";
+      });
+      const container = document.getElementById("productsContainer");
+      if (container) observer.observe(container, { childList: true });
+    });
+  </script>
 </body>
 </html>
