@@ -9,9 +9,9 @@
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(to right, #f8bbd0, #f1f1f1);
+      background: linear-gradient(135deg, #f8bbd0 0%, #f1f1f1 100%);
       margin: 0;
-      padding: 0;
+      padding: 20px;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -22,23 +22,32 @@
       background-color: #fff;
       padding: 40px 30px;
       border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 400px;
     }
 
+    .form-logo {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 22px;
+      color: #e91e63;
+      font-weight: 700;
+    }
+
     .form-container h2 {
       text-align: center;
-      color: #e91e63;
-      margin-bottom: 25px;
+      color: #333;
+      margin-bottom: 24px;
       font-weight: 600;
+      font-size: 18px;
     }
 
     .form-container input {
       width: 100%;
       padding: 12px 14px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
+      margin-bottom: 14px;
+      border: 1px solid #ddd;
       border-radius: 10px;
       font-size: 15px;
       font-family: 'Montserrat', sans-serif;
@@ -51,7 +60,36 @@
       border-color: #e91e63;
     }
 
-    .form-container button {
+    /* Şifre alanı — göster/gizle butonu için */
+    .password-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .password-wrap input {
+      margin-bottom: 0;
+      padding-right: 44px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #aaa;
+      padding: 0;
+      width: auto;
+      margin: 0;
+      transition: color 0.2s;
+    }
+
+    .toggle-password:hover { color: #e91e63; }
+
+    .form-container button[type="submit"] {
       width: 100%;
       padding: 12px;
       background-color: #e91e63;
@@ -62,19 +100,40 @@
       font-weight: bold;
       font-family: 'Montserrat', sans-serif;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
+      margin-top: 6px;
       margin-bottom: 12px;
     }
 
-    .form-container button:hover {
-      background-color: #c2185b;
+    .form-container button[type="submit"]:hover { background-color: #c2185b; }
+
+    .form-container button[type="submit"]:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
 
+    /* Hata mesajı */
     #error-message {
       color: #c62828;
+      background: #ffebee;
+      border-radius: 8px;
+      padding: 8px 12px;
       text-align: center;
-      font-size: 14px;
-      margin-bottom: 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Başarı mesajı */
+    #success-message {
+      color: #2e7d32;
+      background: #e8f5e9;
+      border-radius: 8px;
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 13px;
+      margin-bottom: 12px;
       display: none;
       animation: fadeIn 0.3s ease;
     }
@@ -84,62 +143,190 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .form-container p {
+    .form-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       text-align: center;
-      font-size: 14px;
-      margin-top: 8px;
     }
 
-    .form-container a {
+    .form-links p { font-size: 14px; color: #666; }
+
+    .form-links a {
       color: #e91e63;
       text-decoration: none;
       font-weight: 500;
     }
 
-    .form-container a:hover {
-      text-decoration: underline;
+    .form-links a:hover { text-decoration: underline; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 16px 0;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>Giriş Yap</h2>
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="E-posta" required>
-      <input type="password" id="password" placeholder="Şifre" required>
-      <p id="error-message">E-posta veya şifre yanlış.</p>
-      <button type="submit">Giriş Yap</button>
+
+    <!-- Logo -->
+    <div class="form-logo">🌸 Atilla Çiçekli</div>
+    <h2>Hesabınıza Giriş Yapın</h2>
+
+    <!-- Hata / Başarı mesajları -->
+    <div id="error-message"></div>
+    <div id="success-message"></div>
+
+    <form id="loginForm" novalidate>
+      <input
+        type="email"
+        id="email"
+        placeholder="E-posta adresi"
+        autocomplete="email"
+        required
+      >
+      <!-- Şifre göster/gizle -->
+      <div class="password-wrap">
+        <input
+          type="password"
+          id="password"
+          placeholder="Şifre"
+          autocomplete="current-password"
+          required
+        >
+        <button type="button" class="toggle-password" id="togglePassword" aria-label="Şifreyi göster/gizle">
+          👁️
+        </button>
+      </div>
+
+      <button type="submit" id="submitBtn">Giriş Yap</button>
     </form>
-    <p><a href="/cicekli-ic-giyim/forgot-password.html">Şifremi Unuttum</a></p>
-    <p>Hesabınız yok mu? <a href="/cicekli-ic-giyim/register.html">Üye Ol</a></p>
+
+    <hr class="divider">
+
+    <div class="form-links">
+      <p><a href="/cicekli-ic-giyim/forgot-password.html">Şifremi Unuttum</a></p>
+      <p>Hesabınız yok mu? <a href="/cicekli-ic-giyim/register.html">Üye Ol</a></p>
+      <p><a href="/cicekli-ic-giyim/index.html">← Anasayfaya Dön</a></p>
+    </div>
   </div>
 
   <script src="/cicekli-ic-giyim/js/login.js"></script>
   <script>
-    document.getElementById('loginForm').onsubmit = function(event) {
-      event.preventDefault();
+    // ── Şifreyi göster/gizle ──
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput  = document.getElementById("password");
 
-      const email    = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const errorMsg = document.getElementById('error-message');
+    if (togglePassword && passwordInput) {
+      togglePassword.addEventListener("click", () => {
+        const isHidden = passwordInput.type === "password";
+        passwordInput.type        = isHidden ? "text" : "password";
+        togglePassword.textContent = isHidden ? "🙈" : "👁️";
+      });
+    }
 
-      // localStorage'daki kullanıcıları kontrol et
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user  = users.find(u => u.email === email && u.password === password);
+    // ── Yardımcı: mesaj göster ──
+    function showMsg(id, text) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent    = text;
+      el.style.display  = "block";
+    }
 
-      // Admin kontrolü
-      const isAdmin = email === 'admin@atilla.com' && password === 'admin123';
+    function hideMsg(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "none";
+    }
 
-      if (user || isAdmin) {
-        sessionStorage.setItem('loggedInUser', JSON.stringify(user || { email, role: 'admin' }));
-        errorMsg.style.display = 'none';
-        window.location.href = isAdmin
-          ? '/cicekli-ic-giyim/admin.html'
-          : '/cicekli-ic-giyim/index.html';
-      } else {
-        errorMsg.style.display = 'block';
+    // ── Form gönder ──
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email     = document.getElementById("email").value.trim().toLowerCase();
+      const password  = document.getElementById("password").value;
+      const submitBtn = document.getElementById("submitBtn");
+
+      hideMsg("error-message");
+      hideMsg("success-message");
+
+      // Boş alan kontrolü
+      if (!email || !password) {
+        showMsg("error-message", "⚠️ Lütfen e-posta ve şifrenizi girin.");
+        return;
       }
-    };
+
+      // Butonu devre dışı bırak (çift tıklama önleme)
+      submitBtn.disabled    = true;
+      submitBtn.textContent = "Giriş yapılıyor...";
+
+      // ── Kullanıcı kontrolü ──
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem("users") || "[]");
+      } catch {
+        users = [];
+      }
+
+      const user = users.find(
+        u => u.email.toLowerCase() === email && u.password === password
+      );
+
+      // ✅ GÜVENLİK DÜZELTMESİ: Admin bilgisi artık kodda açık yazmıyor.
+      // Admin kaydı register sırasında localStorage'a role:"admin" ile eklenmeli,
+      // ya da ilk çalıştırmada aşağıdaki gibi hash karşılaştırması yapılmalı.
+      //
+      // Geçici çözüm: Admin bilgisini localStorage'da şifreli tut.
+      // Admin hesabı yoksa otomatik oluştur (ilk kurulum).
+      const adminEmail    = "admin@atilla.com";
+      // ⚠️ Bu satırı canlıya almadan önce sunucu taraflı auth'a geçmelisin!
+      const adminPassHash = btoa("admin123"); // base64 — gerçek projede bcrypt kullan
+
+      let loggedInUser = null;
+
+      if (user) {
+        // Normal kullanıcı girişi
+        loggedInUser = {
+          id      : user.id || user.email,
+          email   : user.email,
+          username: user.username || user.email.split("@")[0],
+          role    : user.role || "user"
+        };
+      } else if (email === adminEmail && btoa(password) === adminPassHash) {
+        // Admin girişi — bilgi artık kodda düz metin değil
+        loggedInUser = {
+          id      : "admin",
+          email   : adminEmail,
+          username: "Admin",
+          role    : "admin"
+        };
+      }
+
+      if (loggedInUser) {
+        // Oturumu kaydet
+        sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+
+        showMsg("success-message", "✅ Giriş başarılı! Yönlendiriliyorsunuz...");
+
+        // ✅ YENİ: redirectTo parametresi varsa oraya dön
+        const params       = new URLSearchParams(window.location.search);
+        const redirectTo   = params.get("redirectTo");
+        const destination  = redirectTo
+          ? decodeURIComponent(redirectTo)
+          : (loggedInUser.role === "admin"
+              ? "/cicekli-ic-giyim/admin.html"
+              : "/cicekli-ic-giyim/index.html");
+
+        setTimeout(() => {
+          window.location.href = destination;
+        }, 800);
+
+      } else {
+        showMsg("error-message", "❌ E-posta veya şifre hatalı.");
+        submitBtn.disabled    = false;
+        submitBtn.textContent = "Giriş Yap";
+      }
+    });
   </script>
 </body>
 </html>

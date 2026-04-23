@@ -9,6 +9,8 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
     body { background-color: #f4f4f4; color: #333; }
+
+    /* ── HEADER ── */
     header {
       background-color: #fff;
       display: flex;
@@ -21,10 +23,13 @@
       z-index: 10;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
-    header h1 { color: #e91e63; font-size: 24px; }
+    .logo h1 { margin: 0; font-size: 26px; color: #e91e63; font-weight: 600; }
+
+    /* ── NAV ── */
     nav { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     nav a { text-decoration: none; color: #555; font-weight: 500; transition: color 0.3s; }
     nav a:hover { color: #e91e63; }
+    #greeting { font-weight: bold; color: #e91e63; }
     nav button {
       background-color: #e91e63;
       color: white;
@@ -38,6 +43,25 @@
     }
     nav button:hover { background-color: #c2185b; }
 
+    /* ── HAMBURGEr (MOBİL) ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #e91e63;
+      border-radius: 3px;
+    }
+
+    /* ── ANA İÇERİK ── */
     main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 
     .admin-title {
@@ -67,6 +91,7 @@
       border-bottom: 1px solid #fce4ec;
     }
 
+    /* ── FORM ALANLARI ── */
     input, select, textarea {
       width: 100%;
       padding: 10px 12px;
@@ -76,10 +101,71 @@
       font-family: 'Montserrat', sans-serif;
       margin-bottom: 12px;
       box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #e91e63;
     }
 
-    input:focus, select:focus { outline: none; border-color: #e91e63; }
+    /* Görsel yükleme alanı */
+    .image-upload-area {
+      border: 2px dashed #f8bbd0;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .image-upload-area:hover { border-color: #e91e63; background: #fce4ec22; }
+    .image-upload-area input[type="file"] { display: none; }
+    .image-upload-area label {
+      cursor: pointer;
+      font-size: 13px;
+      color: #888;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .image-upload-area label span { font-size: 28px; }
+    #imagePreview {
+      max-width: 100%;
+      max-height: 120px;
+      border-radius: 8px;
+      margin-top: 8px;
+      display: none;
+    }
 
+    /* Beden seçimi */
+    .size-options {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .size-options label {
+      cursor: pointer;
+    }
+    .size-options input[type="checkbox"] { display: none; }
+    .size-options span {
+      display: inline-block;
+      padding: 5px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #555;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .size-options input[type="checkbox"]:checked + span {
+      background-color: #e91e63;
+      color: white;
+      border-color: #e91e63;
+    }
+
+    /* ── BUTONLAR ── */
     .btn {
       display: inline-block;
       padding: 10px 20px;
@@ -95,7 +181,6 @@
       width: 100%;
       margin-top: 5px;
     }
-
     .btn:hover { background-color: #c2185b; }
 
     .btn-danger {
@@ -105,10 +190,10 @@
       width: auto;
       margin-top: 0;
     }
-
     .btn-danger:hover { background-color: #b71c1c; }
 
-    #productList { margin-top: 20px; }
+    /* ── ÜRÜN LİSTESİ ── */
+    #productList { margin-top: 10px; }
 
     .product-row {
       display: flex;
@@ -117,21 +202,43 @@
       padding: 10px 0;
       border-bottom: 1px solid #f4f4f4;
       font-size: 14px;
+      gap: 10px;
+    }
+    .product-row:last-child { border-bottom: none; }
+    .product-row-info { flex: 1; min-width: 0; }
+    .product-row-info strong { color: #e91e63; display: block; }
+    .product-row-info span { color: #777; font-size: 12px; }
+
+    /* Ürün küçük resmi */
+    .product-thumb {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #eee;
+      flex-shrink: 0;
     }
 
-    .product-row span { color: #555; }
-    .product-row strong { color: #e91e63; }
+    /* Arama (ürün listesi içi) */
+    #listSearch {
+      margin-bottom: 14px;
+      width: 100%;
+    }
 
+    /* ── DURUM MESAJI ── */
     #statusMsg {
       text-align: center;
       font-size: 14px;
       margin-top: 10px;
       min-height: 20px;
+      border-radius: 6px;
+      padding: 6px 0;
+      transition: opacity 0.3s;
     }
+    #statusMsg.success { color: #2e7d32; background: #e8f5e9; }
+    #statusMsg.error   { color: #c62828; background: #ffebee; }
 
-    #statusMsg.success { color: #2e7d32; }
-    #statusMsg.error   { color: #c62828; }
-
+    /* ── FOOTER ── */
     footer {
       text-align: center;
       padding: 20px;
@@ -142,17 +249,41 @@
       margin-top: 60px;
     }
 
+    /* ── MOBİL ── */
     @media (max-width: 768px) {
       .admin-grid { grid-template-columns: 1fr; }
-      header { flex-direction: column; align-items: flex-start; }
-      nav { margin-top: 10px; }
+      header { flex-wrap: wrap; position: relative; }
+      .hamburger { display: flex; }
+      nav {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 16px 24px;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        z-index: 9;
+      }
+      nav.open { display: flex; }
     }
   </style>
 </head>
-<body data-require-admin>
+<body>
+
   <header>
-    <h1>Atilla Çiçekli İç Giyim — Admin</h1>
-    <nav>
+    <div class="logo">
+      <h1>Atilla Çiçekli İç Giyim — Admin</h1>
+    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menüyü aç/kapat">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="mainNav">
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
       <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
       <span id="greeting"></span>
@@ -165,71 +296,142 @@
 
     <div class="admin-grid">
 
-      <!-- Ürün Ekle -->
+      <!-- ── Ürün Ekle ── -->
       <div class="admin-card">
         <h3>➕ Ürün Ekle</h3>
-        <input type="text" id="productTitle" placeholder="Ürün Adı">
-        <input type="number" id="productPrice" placeholder="Fiyat (₺)" step="0.01">
-        <input type="text" id="productImage" placeholder="Görsel dosya adı (örn: sutyen.jpg)">
+
+        <input type="text" id="productTitle" placeholder="Ürün Adı *">
+
+        <input type="number" id="productPrice" placeholder="Fiyat (₺) *" step="0.01" min="0">
+
+        <textarea id="productDesc" placeholder="Ürün açıklaması (isteğe bağlı)" rows="2" style="resize:vertical;"></textarea>
+
         <select id="productCategory">
-          <option value="">Kategori Seçin</option>
+          <option value="">Kategori Seçin *</option>
           <option value="sutyen">Sütyen</option>
           <option value="kilot">Külot</option>
           <option value="takim">Takım</option>
           <option value="gecelik">Gecelik</option>
           <option value="pijama">Pijama</option>
         </select>
+
+        <!-- Beden seçimi -->
+        <p style="font-size:13px; color:#777; margin-bottom:8px;">Mevcut Bedenler</p>
+        <div class="size-options">
+          <label><input type="checkbox" value="XS"><span>XS</span></label>
+          <label><input type="checkbox" value="S"><span>S</span></label>
+          <label><input type="checkbox" value="M"><span>M</span></label>
+          <label><input type="checkbox" value="L"><span>L</span></label>
+          <label><input type="checkbox" value="XL"><span>XL</span></label>
+          <label><input type="checkbox" value="XXL"><span>XXL</span></label>
+        </div>
+
+        <!-- Görsel yükleme -->
+        <div class="image-upload-area" onclick="document.getElementById('productImageFile').click()">
+          <input type="file" id="productImageFile" accept="image/*">
+          <label>
+            <span>🖼️</span>
+            Görsel seçmek için tıklayın
+          </label>
+          <img id="imagePreview" src="" alt="Önizleme">
+        </div>
+
         <button class="btn" onclick="addProduct()">Ürün Ekle</button>
         <div id="statusMsg"></div>
       </div>
 
-      <!-- Ürün Listesi -->
+      <!-- ── Ürün Listesi ── -->
       <div class="admin-card">
         <h3>📦 Ürün Listesi</h3>
-        <div id="productList">Yükleniyor...</div>
+        <input type="text" id="listSearch" placeholder="🔍 Listede ara..." oninput="renderProducts()">
+        <div id="productList">
+          <p style="color:#aaa; font-size:14px;">Yükleniyor...</p>
+        </div>
       </div>
 
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Atilla Çiçekli İç Giyim</p>
+    <p>&copy; <span id="footerYear"></span> Atilla Çiçekli İç Giyim</p>
   </footer>
 
   <script src="/cicekli-ic-giyim/js/session.js" defer></script>
   <script>
-    // Admin kontrolü
+    // ── Admin erişim kontrolü (sayfa yüklenir yüklenmez) ──
     const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
     if (!currentUser || currentUser.role !== "admin") {
       window.location.href = "/cicekli-ic-giyim/login.html";
     }
 
-    const greetEl  = document.getElementById("greeting");
-    const logoutBtn = document.getElementById("logoutBtn");
+    document.addEventListener("DOMContentLoaded", () => {
 
-    if (greetEl && currentUser) {
-      greetEl.textContent = `Hoş geldin, ${currentUser.username || currentUser.email}`;
-      greetEl.style.cssText = "font-weight:bold; color:#e91e63;";
-    }
+      // ── Footer yılı ──
+      const yearEl = document.getElementById("footerYear");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", () => {
-        sessionStorage.removeItem("loggedInUser");
-        window.location.href = "/cicekli-ic-giyim/login.html";
-      });
-    }
+      // ── Hamburger menü ──
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const mainNav      = document.getElementById("mainNav");
+      if (hamburgerBtn && mainNav) {
+        hamburgerBtn.addEventListener("click", () => mainNav.classList.toggle("open"));
+      }
 
+      // ── Kullanıcı karşılama ──
+      const greetEl = document.getElementById("greeting");
+      if (greetEl && currentUser) {
+        greetEl.textContent = `Hoş geldin, ${currentUser.username || currentUser.email}`;
+      }
+
+      // ── Çıkış ──
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          sessionStorage.removeItem("loggedInUser");
+          window.location.href = "/cicekli-ic-giyim/login.html";
+        });
+      }
+
+      // ── Görsel önizleme ──
+      const fileInput    = document.getElementById("productImageFile");
+      const imagePreview = document.getElementById("imagePreview");
+      if (fileInput && imagePreview) {
+        fileInput.addEventListener("change", () => {
+          const file = fileInput.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              imagePreview.src     = e.target.result;
+              imagePreview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      renderProducts();
+    });
+
+    // ── localStorage yardımcıları ──
     function getProducts() {
       return JSON.parse(localStorage.getItem("products") || "[]");
     }
-
     function saveProducts(products) {
       localStorage.setItem("products", JSON.stringify(products));
     }
 
+    // ── Ürün listesini render et ──
     function renderProducts() {
       const list     = document.getElementById("productList");
-      const products = getProducts();
+      const query    = (document.getElementById("listSearch")?.value || "").toLowerCase();
+      let   products = getProducts();
+
+      if (query) {
+        products = products.filter(p =>
+          p.title.toLowerCase().includes(query) ||
+          (p.category || "").toLowerCase().includes(query)
+        );
+      }
 
       if (!products.length) {
         list.innerHTML = '<p style="color:#aaa; font-size:14px;">Henüz ürün eklenmedi.</p>';
@@ -238,64 +440,90 @@
 
       list.innerHTML = products.map((p, i) => `
         <div class="product-row">
-          <div>
-            <strong>${p.title}</strong><br>
-            <span>₺${parseFloat(p.price).toFixed(2)} — ${p.category || "Genel"}</span>
+          ${p.imageData
+            ? `<img class="product-thumb" src="${p.imageData}" alt="${p.title}">`
+            : `<div class="product-thumb" style="background:#fce4ec; display:flex; align-items:center; justify-content:center; font-size:20px;">🌸</div>`
+          }
+          <div class="product-row-info">
+            <strong>${p.title}</strong>
+            <span>₺${parseFloat(p.price).toFixed(2)} · ${p.category || "Genel"}${p.sizes?.length ? " · " + p.sizes.join(", ") : ""}</span>
           </div>
           <button class="btn btn-danger" onclick="deleteProduct(${i})">Sil</button>
         </div>
       `).join("");
     }
 
+    // ── Ürün ekle ──
     function addProduct() {
       const title    = document.getElementById("productTitle").value.trim();
       const price    = document.getElementById("productPrice").value.trim();
-      const image    = document.getElementById("productImage").value.trim();
+      const desc     = document.getElementById("productDesc").value.trim();
       const category = document.getElementById("productCategory").value;
       const msg      = document.getElementById("statusMsg");
+      const preview  = document.getElementById("imagePreview");
 
+      // Seçili bedenler
+      const sizes = [...document.querySelectorAll(".size-options input[type='checkbox']:checked")]
+                      .map(cb => cb.value);
+
+      // Zorunlu alan kontrolü
       if (!title || !price || !category) {
-        msg.textContent = "Lütfen ad, fiyat ve kategori alanlarını doldurun.";
-        msg.className   = "error";
+        showMsg("⚠️ Lütfen ürün adı, fiyat ve kategori alanlarını doldurun.", "error");
+        return;
+      }
+      if (isNaN(parseFloat(price)) || parseFloat(price) < 0) {
+        showMsg("⚠️ Geçerli bir fiyat girin.", "error");
         return;
       }
 
-      const products = getProducts();
+      const products  = getProducts();
       const newProduct = {
-        id      : Date.now(),
+        id       : Date.now(),
         title,
-        price   : parseFloat(price),
-        image   : image || "placeholder.jpg",
-        category
+        price    : parseFloat(price),
+        desc,
+        category,
+        sizes,
+        // Görsel: önizleme varsa base64 olarak kaydet
+        imageData: preview && preview.style.display !== "none" ? preview.src : null
       };
 
       products.push(newProduct);
       saveProducts(products);
 
-      msg.textContent = `✅ "${title}" başarıyla eklendi!`;
-      msg.className   = "success";
+      showMsg(`✅ "${title}" başarıyla eklendi!`, "success");
 
+      // Formu sıfırla
       document.getElementById("productTitle").value    = "";
       document.getElementById("productPrice").value    = "";
-      document.getElementById("productImage").value    = "";
+      document.getElementById("productDesc").value     = "";
       document.getElementById("productCategory").value = "";
+      document.querySelectorAll(".size-options input[type='checkbox']")
+              .forEach(cb => cb.checked = false);
+      if (preview) { preview.src = ""; preview.style.display = "none"; }
+      document.getElementById("productImageFile").value = "";
 
       renderProducts();
     }
 
+    // ── Ürün sil ──
     function deleteProduct(index) {
       const products = getProducts();
-      const name     = products[index].title;
+      const name     = products[index]?.title || "Ürün";
+      if (!confirm(`"${name}" silinsin mi?`)) return;
       products.splice(index, 1);
       saveProducts(products);
       renderProducts();
-
-      const msg     = document.getElementById("statusMsg");
-      msg.textContent = `🗑️ "${name}" silindi.`;
-      msg.className   = "success";
+      showMsg(`🗑️ "${name}" silindi.`, "success");
     }
 
-    renderProducts();
+    // ── Durum mesajı göster (3 sn sonra kaybolur) ──
+    function showMsg(text, type) {
+      const msg = document.getElementById("statusMsg");
+      msg.textContent = text;
+      msg.className   = type;
+      setTimeout(() => { msg.textContent = ""; msg.className = ""; }, 3000);
+    }
   </script>
 </body>
 </html>

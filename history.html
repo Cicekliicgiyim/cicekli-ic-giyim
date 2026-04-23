@@ -7,13 +7,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cicekli-ic-giyim/style.css">
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Montserrat', sans-serif;
       background: #f4f4f4;
-      margin: 0;
-      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
+    /* ── HEADER ── */
     header {
       background: #fff;
       padding: 15px 30px;
@@ -26,29 +31,13 @@
       z-index: 10;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
+    .logo h1 { color: #e91e63; font-size: 26px; font-weight: 600; margin: 0; }
 
-    header h1 {
-      color: #e91e63;
-      font-size: 24px;
-      margin: 0;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #555;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
+    /* ── NAV ── */
+    nav { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: #555; font-weight: 500; transition: color 0.3s; }
     nav a:hover { color: #e91e63; }
-
+    #greeting { font-weight: bold; color: #e91e63; }
     nav button {
       background-color: #e91e63;
       color: white;
@@ -60,16 +49,31 @@
       font-family: 'Montserrat', sans-serif;
       transition: background-color 0.3s;
     }
-
     nav button:hover { background-color: #c2185b; }
 
-    #greeting {
-      font-weight: bold;
-      color: #e91e63;
+    /* ── HAMBURGEr (MOBİL) ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #e91e63;
+      border-radius: 3px;
     }
 
+    /* ── ANA İÇERİK ── */
     main {
+      flex: 1;
       max-width: 800px;
+      width: 100%;
       margin: 40px auto;
       padding: 30px 20px;
       background: white;
@@ -77,12 +81,27 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.07);
     }
 
-    main h2 {
-      color: #e91e63;
-      font-size: 22px;
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
+    main h2 { color: #e91e63; font-size: 22px; }
+
+    /* Sipariş sayacı rozeti */
+    .order-count {
+      font-size: 13px;
+      color: #888;
+      background: #f4f4f4;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── SİPARİŞ KARTI ── */
     .order {
       border: 1px solid #f0f0f0;
       border-radius: 10px;
@@ -90,60 +109,110 @@
       margin-bottom: 16px;
       transition: box-shadow 0.3s;
     }
-
-    .order:hover {
-      box-shadow: 0 2px 8px rgba(233,30,99,0.1);
-    }
+    .order:last-child { margin-bottom: 0; }
+    .order:hover { box-shadow: 0 2px 8px rgba(233,30,99,0.1); }
 
     .order-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    .order-number {
-      font-weight: 700;
-      color: #e91e63;
-      font-size: 15px;
-    }
+    .order-header-left { display: flex; flex-direction: column; gap: 4px; }
+    .order-number { font-weight: 700; color: #e91e63; font-size: 15px; }
+    .order-date   { font-size: 12px; color: #999; }
 
-    .order-date {
-      font-size: 13px;
-      color: #999;
-    }
-
+    /* Durum renkleri */
     .order-status {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 20px;
-      background-color: #fce4ec;
-      color: #c2185b;
     }
+    .status-hazirlaniyor { background-color: #fff8e1; color: #f57f17; }
+    .status-kargoda      { background-color: #e3f2fd; color: #1565c0; }
+    .status-teslim       { background-color: #e8f5e9; color: #2e7d32; }
+    .status-iptal        { background-color: #ffebee; color: #c62828; }
+    .status-default      { background-color: #fce4ec; color: #c2185b; }
 
+    /* Ürün listesi */
     .order-items {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 12px;
+      line-height: 1.7;
+      border-left: 3px solid #fce4ec;
+      padding-left: 12px;
+    }
+
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .order-item-row span:last-child { color: #e91e63; font-weight: 600; }
+
+    /* Alt satır: toplam */
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid #f4f4f4;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .order-address { font-size: 12px; color: #aaa; }
+    .order-total   { font-size: 15px; font-weight: 700; color: #333; }
+    .order-total span { color: #e91e63; }
+
+    /* ── GİRİŞ GEREKTİRİR ── */
+    .login-required {
+      text-align: center;
+      padding: 50px 20px;
+      color: #aaa;
+    }
+    .login-required .icon { font-size: 48px; margin-bottom: 16px; }
+    .login-required p { margin-bottom: 16px; font-size: 15px; }
+    .btn-login {
+      display: inline-block;
+      padding: 10px 24px;
+      background-color: #e91e63;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
       font-size: 14px;
-      color: #555;
-      margin-bottom: 8px;
+      transition: background-color 0.3s;
     }
+    .btn-login:hover { background-color: #c2185b; }
 
-    .order-total {
-      font-size: 15px;
-      font-weight: 700;
-      color: #333;
-      text-align: right;
-    }
-
+    /* ── BOŞ DURUM ── */
     .empty-message {
       text-align: center;
       color: #aaa;
       font-size: 15px;
-      padding: 40px 0;
+      padding: 50px 20px;
     }
+    .empty-message .icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-message a {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 24px;
+      background-color: #e91e63;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    .empty-message a:hover { background-color: #c2185b; }
 
+    /* ── FOOTER ── */
     footer {
       text-align: center;
       padding: 20px;
@@ -154,42 +223,206 @@
       margin-top: 40px;
     }
 
+    /* ── MOBİL ── */
     @media (max-width: 600px) {
-      header {
+      .hamburger { display: flex; }
+      nav {
+        display: none;
         flex-direction: column;
         align-items: flex-start;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 16px 24px;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        z-index: 9;
       }
-      nav { margin-top: 10px; }
+      nav.open { display: flex; }
+      header { flex-wrap: wrap; position: relative; }
+      main { margin: 20px 12px; padding: 20px 16px; }
+      .order-item-row { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
-<body data-require-login>
+<body>
+
   <header>
-    <h1>Atilla Çiçekli İç Giyim</h1>
-    <nav>
+    <div class="logo">
+      <h1>Atilla Çiçekli İç Giyim</h1>
+    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menüyü aç/kapat">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="mainNav">
       <a href="/cicekli-ic-giyim/index.html">Anasayfa</a>
       <a href="/cicekli-ic-giyim/products.html">Ürünler</a>
       <a href="/cicekli-ic-giyim/cart.html">Sepetim</a>
       <a href="/cicekli-ic-giyim/history.html">Sipariş Geçmişi</a>
+      <a href="/cicekli-ic-giyim/admin.html" id="adminLink" style="display:none;">Admin</a>
       <span id="greeting"></span>
       <button id="loginBtn">Giriş Yap</button>
       <button id="registerBtn">Üye Ol</button>
-      <button id="logoutBtn" style="display: none;">Çıkış Yap</button>
+      <button id="logoutBtn" style="display:none;">Çıkış Yap</button>
     </nav>
   </header>
 
   <main>
-    <h2>Sipariş Geçmişiniz</h2>
+    <div class="page-header">
+      <h2>📋 Sipariş Geçmişim</h2>
+      <span class="order-count" id="orderCount"></span>
+    </div>
     <div id="order-history">
-      <p class="empty-message">Henüz siparişiniz bulunmuyor.</p>
+      <!-- İçerik JS tarafından doldurulur -->
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Atilla Çiçekli İç Giyim</p>
+    <p>&copy; <span id="footerYear"></span> Atilla Çiçekli İç Giyim</p>
   </footer>
 
   <script src="/cicekli-ic-giyim/js/session.js" defer></script>
   <script src="/cicekli-ic-giyim/js/history.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // ── Footer yılı ──
+      const yearEl = document.getElementById("footerYear");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // ── Hamburger menü ──
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const mainNav      = document.getElementById("mainNav");
+      if (hamburgerBtn && mainNav) {
+        hamburgerBtn.addEventListener("click", () => mainNav.classList.toggle("open"));
+      }
+
+      // ── Oturum yönetimi ──
+      const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+      const greeting    = document.getElementById("greeting");
+      const logoutBtn   = document.getElementById("logoutBtn");
+      const loginBtn    = document.getElementById("loginBtn");
+      const registerBtn = document.getElementById("registerBtn");
+      const adminLink   = document.getElementById("adminLink");
+      const container   = document.getElementById("order-history");
+      const orderCount  = document.getElementById("orderCount");
+
+      if (currentUser) {
+        if (greeting)    greeting.textContent      = `Hoş geldin, ${currentUser.username || currentUser.email}`;
+        if (logoutBtn)   logoutBtn.style.display   = "inline-block";
+        if (loginBtn)    loginBtn.style.display    = "none";
+        if (registerBtn) registerBtn.style.display = "none";
+        if (adminLink && currentUser.role === "admin") adminLink.style.display = "inline-block";
+
+        // Giriş yapılmışsa siparişleri göster
+        renderOrders(currentUser, container, orderCount);
+
+      } else {
+        // Giriş yapılmamışsa bilgi mesajı göster
+        if (greeting)    greeting.textContent      = "";
+        if (logoutBtn)   logoutBtn.style.display   = "none";
+        if (loginBtn)    loginBtn.style.display    = "inline-block";
+        if (registerBtn) registerBtn.style.display = "inline-block";
+
+        container.innerHTML = `
+          <div class="login-required">
+            <div class="icon">🔒</div>
+            <p>Sipariş geçmişinizi görmek için giriş yapmanız gerekiyor.</p>
+            <a href="/cicekli-ic-giyim/login.html" class="btn-login">Giriş Yap</a>
+          </div>
+        `;
+      }
+
+      if (logoutBtn) logoutBtn.addEventListener("click", () => {
+        sessionStorage.removeItem("loggedInUser");
+        location.reload();
+      });
+      if (loginBtn) loginBtn.addEventListener("click", () => {
+        window.location.href = "/cicekli-ic-giyim/login.html";
+      });
+      if (registerBtn) registerBtn.addEventListener("click", () => {
+        window.location.href = "/cicekli-ic-giyim/register.html";
+      });
+    });
+
+    // ── Siparişleri render et ──
+    // NOT: history.js zaten renderOrders() tanımlıyorsa bu fonksiyonu oraya taşı.
+    function renderOrders(user, container, orderCount) {
+      // Kullanıcıya ait siparişleri localStorage'dan çek
+      const allOrders  = JSON.parse(localStorage.getItem("orders") || "[]");
+      const userOrders = allOrders.filter(o =>
+        o.userId === user.id || o.userEmail === user.email
+      );
+
+      // Sipariş sayacı
+      if (orderCount) {
+        orderCount.textContent = userOrders.length > 0
+          ? `${userOrders.length} sipariş`
+          : "";
+      }
+
+      if (!userOrders.length) {
+        container.innerHTML = `
+          <div class="empty-message">
+            <div class="icon">📦</div>
+            <p>Henüz siparişiniz bulunmuyor.</p>
+            <a href="/cicekli-ic-giyim/products.html">Alışverişe Başla</a>
+          </div>
+        `;
+        return;
+      }
+
+      // En yeni sipariş önce
+      const sorted = [...userOrders].reverse();
+
+      container.innerHTML = sorted.map(order => {
+        // Durum badge rengi
+        const statusClass = {
+          "Hazırlanıyor" : "status-hazirlaniyor",
+          "Kargoda"      : "status-kargoda",
+          "Teslim Edildi": "status-teslim",
+          "İptal Edildi" : "status-iptal"
+        }[order.status] || "status-default";
+
+        // Ürün satırları
+        const itemRows = (order.items || []).map(item => `
+          <div class="order-item-row">
+            <span>${item.title}${item.size ? ` (${item.size})` : ""} × ${item.qty}</span>
+            <span>₺${(item.price * item.qty).toFixed(2)}</span>
+          </div>
+        `).join("") || "<span>Ürün bilgisi bulunamadı.</span>";
+
+        // Tarih formatla
+        const date = order.date
+          ? new Date(order.date).toLocaleDateString("tr-TR", {
+              day: "numeric", month: "long", year: "numeric"
+            })
+          : "—";
+
+        return `
+          <div class="order">
+            <div class="order-header">
+              <div class="order-header-left">
+                <span class="order-number">Sipariş #${order.id || "—"}</span>
+                <span class="order-date">${date}</span>
+              </div>
+              <span class="order-status ${statusClass}">
+                ${order.status || "İşlemde"}
+              </span>
+            </div>
+            <div class="order-items">${itemRows}</div>
+            <div class="order-footer">
+              ${order.address ? `<span class="order-address">📍 ${order.address}</span>` : "<span></span>"}
+              <span class="order-total">Toplam: <span>₺${parseFloat(order.total || 0).toFixed(2)}</span></span>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+  </script>
 </body>
 </html>
