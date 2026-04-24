@@ -1,8 +1,7 @@
 // ─── Backend URL ───────────────────────────────────────────
-// Railway'e deploy ettikten sonra bu URL'yi güncelleyin
 const API_URL = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
   ? "http://localhost:3000"
-  : "https://SIZIN-RAILWAY-URL.railway.app"; // ← Railway URL'nizi buraya yazın
+  : "mongodb+srv://cicekliticaret98_db_user:MYKKcvagRah1XyV2@cluster0.zyb223o.mongodb.net/cicekli"; // ← Render URL'nizi buraya yazın
 
 // ─── Genel fetch yardımcısı ────────────────────────────────
 const api = async (endpoint, method = "GET", body = null) => {
@@ -52,10 +51,10 @@ const Auth = {
     api("/api/verify-reset-code", "POST", { email, code, newPassword }),
 
   // Oturum: kullanıcıyı localStorage'a kaydet
-  saveSession: (user) => localStorage.setItem("cicekli_user", JSON.stringify(user)),
-  getSession : ()     => JSON.parse(localStorage.getItem("cicekli_user") || "null"),
-  clearSession: ()    => localStorage.removeItem("cicekli_user"),
-  isLoggedIn  : ()    => !!Auth.getSession()
+  saveSession : (user) => localStorage.setItem("cicekli_user", JSON.stringify(user)),
+  getSession  : ()     => JSON.parse(localStorage.getItem("cicekli_user") || "null"),
+  clearSession: ()     => localStorage.removeItem("cicekli_user"),
+  isLoggedIn  : ()     => !!Auth.getSession()
 };
 
 // ══════════════════════════════════════════════════════════
@@ -63,12 +62,12 @@ const Auth = {
 // ══════════════════════════════════════════════════════════
 
 const Products = {
-  getAll     : (category = "all", sort = "") => api(`/api/products?category=${category}&sort=${sort}`),
-  getById    : (id)  => api(`/api/products/${id}`),
+  getAll : (category = "all", sort = "") => api(`/api/products?category=${category}&sort=${sort}`),
+  getById: (id)       => api(`/api/products/${id}`),
   // Admin
-  create     : (data) => api("/api/admin/products", "POST", data),
-  update     : (id, data) => api(`/api/admin/products/${id}`, "PUT", data),
-  delete     : (id)  => api(`/api/admin/products/${id}`, "DELETE")
+  create : (data)     => api("/api/admin/products", "POST", data),
+  update : (id, data) => api(`/api/admin/products/${id}`, "PUT", data),
+  delete : (id)       => api(`/api/admin/products/${id}`, "DELETE")
 };
 
 // ══════════════════════════════════════════════════════════
@@ -116,11 +115,10 @@ const Cart = {
 // ══════════════════════════════════════════════════════════
 
 const Payment = {
-  // iyzico ödeme başlat
   checkout: (cardHolder, cardNumber, expireMonth, expireYear, cvc, address) => {
     const user  = Auth.getSession();
     const items = Cart.get();
-    if (!user)  throw new Error("Lütfen giriş yapın.");
+    if (!user)        throw new Error("Lütfen giriş yapın.");
     if (!items.length) throw new Error("Sepetiniz boş.");
 
     return api("/api/payment/start", "POST", {
@@ -147,8 +145,8 @@ const Orders = {
     return api(`/api/orders/${user._id}`);
   },
   // Admin
-  getAll       : ()           => api("/api/admin/orders"),
-  updateStatus : (id, status) => api(`/api/admin/orders/${id}/status`, "PUT", { status })
+  getAll      : ()           => api("/api/admin/orders"),
+  updateStatus: (id, status) => api(`/api/admin/orders/${id}/status`, "PUT", { status })
 };
 
 // ─── Sayfa yüklenince sepet badge'ini güncelle ─────────────
